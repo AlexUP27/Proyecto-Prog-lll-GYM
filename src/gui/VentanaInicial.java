@@ -28,10 +28,13 @@ public class VentanaInicial extends JFrame{
 		
 		//Establecemos las propiedades de la ventana
 		setBounds(300, 200, 600, 400);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("DEUSTOGYM- Ventana Inicial");
 		ImageIcon imagen = new ImageIcon("img/icono.png");
 		setIconImage(imagen.getImage());
+		
+		JButton IniciarSesion = new JButton("Iniciar sesion");
+		add(IniciarSesion);
 		
 		//Instanciamos los paneles
 		pCentro = new JPanel();
@@ -41,6 +44,8 @@ public class VentanaInicial extends JFrame{
 		pSur = new JPanel();
 		pEste = new JPanel();
 		pOeste = new JPanel();
+		
+		pNorte.add(IniciarSesion, BorderLayout.NORTH);
 		
 		//Añadimos los paneles al panel principal de la ventana
 		getContentPane().add(pNorte, BorderLayout.NORTH);
