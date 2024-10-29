@@ -2,17 +2,17 @@ package bin;
 
 public class Reserva {
 	private Clases clase;
-	private Usuario usuario;
+	private Cliente cliente;
 	
 	public Reserva() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserva(Clases clase, Usuario usuario) {
+	public Reserva(Clases clase, Cliente usuario) {
 		super();
 		this.clase = clase;
-		this.usuario = usuario;
+		this.cliente = usuario;
 	}
 
 	public Clases getClase() {
@@ -23,17 +23,17 @@ public class Reserva {
 		this.clase = clase;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Cliente getUsuario() {
+		return cliente;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(Cliente usuario) {
+		this.cliente = usuario;
 	}
 
 	@Override
 	public String toString() {
-		return "Reserva [clase=" + clase + ", usuario=" + usuario + "]";
+		return "Reserva [clase=" + clase + ", usuario=" + cliente + "]";
 	}
 	
 	
