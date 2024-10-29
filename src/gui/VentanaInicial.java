@@ -1,6 +1,7 @@
 package gui;
 	
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -159,17 +160,32 @@ vActual = this;
 	
 	// Método para abrir una nueva ventana después de la bienvenida
     private void openNewWindow() {
-        // Crear la nueva ventana
+    	// Crear la nueva ventana
         JFrame nuevaVentana = new JFrame("Nueva Ventana");
         nuevaVentana.setSize(400, 300);
         nuevaVentana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         nuevaVentana.setLocationRelativeTo(null);
+
+        // Crear el botón de "Cerrar Sesión" en la esquina superior derecha
+        JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+        btnCerrarSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         
-        JButton botonClientes = new JButton("informacion clientes");
-        botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        // Panel para el botón en la parte superior derecha
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelSuperior.add(btnCerrarSesion);
         
-        nuevaVentana.add(botonClientes, BorderLayout.SOUTH);
+        // Añadir el panel y la etiqueta a la nueva ventana
+        nuevaVentana.add(panelSuperior, BorderLayout.NORTH);
         nuevaVentana.setVisible(true);
+
+        // Listener para el botón de "Cerrar Sesión"
+        btnCerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	nuevaVentana.dispose();  // Cerrar la nueva ventana
+                vActual.setVisible(true);  // Mostrar de nuevo la ventana de inicio de sesión
+            }
+        });
     }
 	
 }
