@@ -33,8 +33,7 @@ public class VentanaInicial extends JFrame{
 		ImageIcon imagen = new ImageIcon("img/icono.png");
 		setIconImage(imagen.getImage());
 		
-		JButton IniciarSesion = new JButton("Iniciar sesion");
-		add(IniciarSesion);
+		JButton Clientes = new JButton("informacion clientes");
 		
 		//Instanciamos los paneles
 		pCentro = new JPanel();
@@ -45,7 +44,8 @@ public class VentanaInicial extends JFrame{
 		pEste = new JPanel();
 		pOeste = new JPanel();
 		
-		pNorte.add(IniciarSesion, BorderLayout.NORTH);
+		pNorte.add(Clientes,BorderLayout.NORTH);
+		
 		
 		//Añadimos los paneles al panel principal de la ventana
 		getContentPane().add(pNorte, BorderLayout.NORTH);
