@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +36,7 @@ public class VentanaInicial extends JFrame{
 		ImageIcon imagen = new ImageIcon("img/icono.png");
 		setIconImage(imagen.getImage());
 		
-		JButton Clientes = new JButton("informacion clientes");
+		JButton botonClientes = new JButton("informacion clientes");
 		
 		//Instanciamos los paneles
 		pCentro = new JPanel();
@@ -44,8 +47,16 @@ public class VentanaInicial extends JFrame{
 		pEste = new JPanel();
 		pOeste = new JPanel();
 		
-		pNorte.add(Clientes,BorderLayout.NORTH);
+		pNorte.add(botonClientes,BorderLayout.NORTH);
 		
+		botonClientes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InformacionClientes insertar = new InformacionClientes();
+				
+			}
+		});
 		
 		//Añadimos los paneles al panel principal de la ventana
 		getContentPane().add(pNorte, BorderLayout.NORTH);

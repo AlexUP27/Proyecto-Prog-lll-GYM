@@ -1,9 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -44,10 +48,18 @@ public class InformacionClientes extends JFrame{
 		JScrollPane scrollPane = new JScrollPane(Jtable);
 		add(scrollPane, BorderLayout.CENTER);
 		
+		JButton botonCerrar = new JButton("Cerrar");
+		add(botonCerrar, BorderLayout.SOUTH);
+		
+		botonCerrar.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+            	dispose();
+        	}
+    	});
+		
 		
 		setVisible(true);
 	}
-	public static void main(String[] args) {
-		InformacionClientes i = new InformacionClientes();
-	}
+	
 }
