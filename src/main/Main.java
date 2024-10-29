@@ -1,9 +1,11 @@
 package main;
 
+import gui.VentanaInicial;
+
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Porfin tenemos github");
+		VentanaInicial v = new VentanaInicial();
 	}
 
 }
