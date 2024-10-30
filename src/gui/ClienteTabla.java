@@ -1,6 +1,5 @@
 package gui;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -9,11 +8,15 @@ import javax.swing.table.AbstractTableModel;
 import bin.Cliente;
 import bin.Cliente.Genre;
 
-public class ModeloTabla extends AbstractTableModel{
+public class ClienteTabla extends AbstractTableModel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Cliente> clientes;
 	private String[] columnas = { "Nombre" , "Apellido" , "Telefono", "Email", "Dierccion", "Edad", "Genero" };
 	
-	public ModeloTabla(List<Cliente> personas, String[] columnas) {
+	public ClienteTabla(List<Cliente> personas, String[] columnas) {
 		this.clientes = personas;
 	}
 

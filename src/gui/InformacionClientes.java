@@ -42,7 +42,7 @@ public class InformacionClientes extends JFrame{
 		setTitle("Informacion de clientes");
 		setSize(700, 500);
 		
-		ModeloTabla modelo = new ModeloTabla(clientes, null);
+		ClienteTabla modelo = new ClienteTabla(clientes, null);
 		JTable Jtable = new JTable(modelo);
 		
 		JScrollPane scrollPane = new JScrollPane(Jtable);

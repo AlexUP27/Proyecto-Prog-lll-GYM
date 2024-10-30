@@ -201,20 +201,33 @@ public class VentanaInicial extends JFrame{
       	JButton botonClientes = new JButton("Informacion Clientes");
       	botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
       	
+      	//Inicializacion del boton informacion monitoress
+      	JButton botonMonitores = new JButton("Informacion Monitores");
+      	botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+      	
       	// Panel para el botón en la parte superior derecha
       	JPanel panelSuperior2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSuperior2.add(botonClientes);
+        panelSuperior2.add(botonMonitores);
         
         // Añadir el panel a la nueva ventana
         nuevaVentana.add(panelSuperior2, BorderLayout.SOUTH);
         nuevaVentana.setVisible(true);
         
-        //Listener y posicion del boton clientes	
+        //Listener y posicion del boton clientes y monitores
         botonClientes.addActionListener(new ActionListener() {
         	
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		InformacionClientes insertar = new InformacionClientes();		
+        	}
+        }); 
+        
+        botonMonitores.addActionListener(new ActionListener() {
+        	
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		InformacionMonitores insertar = new InformacionMonitores();		
         	}
         }); 
     }
