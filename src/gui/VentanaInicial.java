@@ -95,6 +95,7 @@ public class VentanaInicial extends JFrame{
 		//Instanciamos los componentes botón
 		btnInicioSesion = new JButton("INICIO SESIÓN");
 		//btnCierreSesion = new JButton("CIERRE SESIÓN");
+		
 		//Cambiamos el tipo de letra en los botones
 		btnInicioSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 		//btnCierreSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));

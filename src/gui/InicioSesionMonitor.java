@@ -25,7 +25,7 @@ public class InicioSesionMonitor extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton btnInicioSesion;
+	private JButton btnInicioSesion,btnAtras ;
 	//Declaracion de los paneles
 	private JPanel pCentro, pNorte, pEste, pOeste, pSur;
 	private JLabel lblAutorizacionMonitor;
@@ -34,19 +34,12 @@ public class InicioSesionMonitor extends JFrame{
 	private JFrame vActual;
 	
 	
-	//Confirmacion de cierre de ventana
-	private void confirmWindowClosing() {
-		int result = JOptionPane.showConfirmDialog(InicioSesionMonitor.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.YES_OPTION) {
-			System.exit(0);
-		}
-	}
-	
 	public InicioSesionMonitor(){
 		vActual = this;
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle("Monitor");
 		setSize(480, 250);
+		setBounds(300, 200, 600, 400);
 		
 		//Añadimos un listener para que salte la confirmacion de cierre de ventana
 		addWindowListener(new WindowAdapter() {
@@ -78,20 +71,34 @@ public class InicioSesionMonitor extends JFrame{
 		lblAutorizacionMonitor = new JLabel("Introduce tu autorizacion de monitor: ");
 		try {
 			txtAutorizacionMonitor = new JFormattedTextField(new MaskFormatter("########"));
+			txtAutorizacionMonitor = new JTextField(20);
 	    } catch (ParseException e) {
 	        e.printStackTrace();
 	    }
 		
+		// Crear el botón de "Atras" en la esquina superior derecha
+		btnAtras = new JButton("Atras");
+        btnAtras.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+			
 		//Añadimos el botón al panel principal de la ventana
 		pSur.add(btnInicioSesion);
 		pCentro.add(lblAutorizacionMonitor);
 		pCentro.add(txtAutorizacionMonitor);
+		pNorte.add(btnAtras);
 		
+		// Listener para el botón de "Cerrar Sesión"
+        btnAtras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	vActual.dispose();  	   // Cerrar la nueva ventana
+            }
+        });
+						
 		//Añadimos los listeners
         btnInicioSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String autorizacion = txtAutorizacionMonitor.getText();     
+                String autorizacion = txtAutorizacionMonitor.getText(); 
                 if (autorizacion.isEmpty()) {
                     JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -100,6 +107,8 @@ public class InicioSesionMonitor extends JFrame{
             }
         });
 		
+        
+        //Hacer visible todo
 		setVisible(true);
 			
 	}
@@ -161,6 +170,14 @@ public class InicioSesionMonitor extends JFrame{
                 vActual.setVisible(true);  // Mostrar de nuevo la ventana de inicio de sesión
             }
         });
+	}
+	
+	//Confirmacion de cierre de ventana
+	private void confirmWindowClosing() {
+		int result = JOptionPane.showConfirmDialog(InicioSesionMonitor.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
 	}
 	
 }
