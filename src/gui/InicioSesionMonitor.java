@@ -1,5 +1,5 @@
 package gui;
-	
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,36 +8,45 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import javax.swing.ImageIcon;
+import java.text.ParseException;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.text.MaskFormatter;
 
-
-public class VentanaInicial extends JFrame{
-	//Declaracion de los componentes botón
-		private JButton btnInicioSesion, btnCierreSesion;
-		//Declaracion de los componentes etiqueta
-		private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
-		//Declaracion de los componente cuadro de texto
-		private JTextField txtNombreUsuario;
-		private JPasswordField txtContraseniaUsuario;
-		//Declaracion de los paneles
-		private JPanel pCentro, pNorte, pEste, pOeste, pSur;
-		//Declaramos los JFrames
-		private JFrame vActual;
-		
+public class InicioSesionMonitor extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton btnInicioSesion;
+	//Declaracion de los paneles
+	private JPanel pCentro, pNorte, pEste, pOeste, pSur;
+	private JLabel lblAutorizacionMonitor;
+	private JTextField txtAutorizacionMonitor;
+	//Declaramos los JFrames
+	private JFrame vActual;
 	
-	public VentanaInicial() {
-		super();
-		
+	
+	//Confirmacion de cierre de ventana
+	private void confirmWindowClosing() {
+		int result = JOptionPane.showConfirmDialog(InicioSesionMonitor.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
+	public InicioSesionMonitor(){
 		vActual = this;
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setTitle("Monitor");
+		setSize(480, 250);
 		
 		//Añadimos un listener para que salte la confirmacion de cierre de ventana
 		addWindowListener(new WindowAdapter() {
@@ -47,43 +56,14 @@ public class VentanaInicial extends JFrame{
 			}
 		});
 		
-		//Establecemos las propiedades de la ventana
-		setBounds(300, 200, 600, 400);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		
-		//Cambiar el título de la ventana
-		setTitle("DEUSTO GYM");
-		
-		//Cambiar el icono de la ventana (Esquina superior izquierda)
-		ImageIcon imagen = new ImageIcon("img/icono.png");
-		setIconImage(imagen.getImage());
-		
-//		//Inicializacion del boton informacion clientes
-//		JButton botonClientes = new JButton("informacion clientes");
-		
-		//Inicializacion del boton inicio sesion monitor
-		JButton botonMonitor = new JButton("Monitor");
-		
 		//Instanciamos los paneles
-		pCentro = new JPanel();
-		
+		pCentro = new JPanel();	
 		//Modificamos el Layout del panel centro
 		pCentro.setLayout(new GridLayout(2, 2)); //Formato de matriz de 2x2
 		pNorte = new JPanel();
 		pSur = new JPanel();
 		pEste = new JPanel();
 		pOeste = new JPanel();
-		
-		
-		//Listener y posicion del boton clientes
-		pNorte.add(botonMonitor,BorderLayout.WEST);	
-		botonMonitor.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				InicioSesionMonitor insertar = new InicioSesionMonitor();				
-			}
-		});
-		
 		
 		//Añadimos los paneles al panel principal de la ventana
 		getContentPane().add(pNorte, BorderLayout.NORTH);
@@ -94,49 +74,37 @@ public class VentanaInicial extends JFrame{
 		
 		//Instanciamos los componentes botón
 		btnInicioSesion = new JButton("INICIO SESIÓN");
-		//btnCierreSesion = new JButton("CIERRE SESIÓN");
-		//Cambiamos el tipo de letra en los botones
 		btnInicioSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		//btnCierreSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-		
-		lblTitulo = new JLabel("ONGI ETORRI!!");
-		lblNombreUsuario = new JLabel("Introduce tu nombre de usuario: ");
-		lblContraseniaUsuario = new JLabel("Introduce tu contraseña: ");
-		
-		txtNombreUsuario = new JTextField(20);
-		txtContraseniaUsuario = new JPasswordField(20);
+		lblAutorizacionMonitor = new JLabel("Introduce tu autorizacion de monitor: ");
+		try {
+			txtAutorizacionMonitor = new JFormattedTextField(new MaskFormatter("########"));
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
 		
 		//Añadimos el botón al panel principal de la ventana
 		pSur.add(btnInicioSesion);
-		//pSur.add(btnCierreSesion);
-		pNorte.add(lblTitulo);
-		//Como pCentro es un GridLayout, hay que añadir los componentes en el orden en el que queremos que aparezcan (De izda a dcha y de arriba a abajo)
-		pCentro.add(lblNombreUsuario);
-		pCentro.add(txtNombreUsuario);
-		pCentro.add(lblContraseniaUsuario);
-		pCentro.add(txtContraseniaUsuario);
-		
+		pCentro.add(lblAutorizacionMonitor);
+		pCentro.add(txtAutorizacionMonitor);
 		
 		//Añadimos los listeners
         btnInicioSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String user = txtNombreUsuario.getText();
-                String contrasena = new String(txtContraseniaUsuario.getPassword());
-                
-                if (user.isEmpty() || contrasena.isEmpty()) {
+                String autorizacion = txtAutorizacionMonitor.getText();     
+                if (autorizacion.isEmpty()) {
                     JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
                 } else {
-                	panelDeBienvenida(user);
+                	panelDeBienvenida(autorizacion);
                 }
             }
         });
-        
-        setVisible(true);
+		
+		setVisible(true);
+			
 	}
 	
-	
-	private void panelDeBienvenida(String username) {
+	private void panelDeBienvenida(String user) {
         //Creamos un nuevo frame para la bienvenida
         JFrame frameDeBienvenida = new JFrame("Bienvenido");
         frameDeBienvenida.setSize(400, 200);
@@ -144,7 +112,7 @@ public class VentanaInicial extends JFrame{
         frameDeBienvenida.setLocationRelativeTo(null);
         
         //Mensaje de bienvenida (Label)
-        JLabel labelDeBienvenida = new JLabel("¡Bienvenido, " + username + "!", JLabel.CENTER);
+        JLabel labelDeBienvenida = new JLabel("¡Bienvenido, " + user + "!", JLabel.CENTER);
         labelDeBienvenida.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
         
         //Añadimos el label al frame y lo hacemos visible
@@ -164,11 +132,9 @@ public class VentanaInicial extends JFrame{
         
         // Hacer invisible la ventana del main
         vActual.setVisible(false);
-        
     }
 	
-	// Método para abrir una nueva ventana después de la bienvenida
-    private void openNewWindow() {
+	private void openNewWindow() {
     	// Crear la nueva ventana
         JFrame nuevaVentana = new JFrame("Nueva Ventana");
         nuevaVentana.setSize(400, 300);
@@ -195,33 +161,6 @@ public class VentanaInicial extends JFrame{
                 vActual.setVisible(true);  // Mostrar de nuevo la ventana de inicio de sesión
             }
         });
-        
-        //Inicializacion del boton informacion clientes
-      	JButton botonClientes = new JButton("Informacion Clientes");
-      	botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-      	
-      	// Panel para el botón en la parte superior derecha
-      	JPanel panelSuperior2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelSuperior2.add(botonClientes);
-        
-        // Añadir el panel a la nueva ventana
-        nuevaVentana.add(panelSuperior2, BorderLayout.SOUTH);
-        nuevaVentana.setVisible(true);
-        
-        //Listener y posicion del boton clientes	
-        botonClientes.addActionListener(new ActionListener() {
-        	
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		InformacionClientes insertar = new InformacionClientes();		
-        	}
-        }); 
-    }
-    //Confirmacion de cierre de ventana
-  	private void confirmWindowClosing() {
-  		int result = JOptionPane.showConfirmDialog(VentanaInicial.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-  		if (result == JOptionPane.YES_OPTION) {
-  			System.exit(0);
-  		}
-  	}
+	}
+	
 }
