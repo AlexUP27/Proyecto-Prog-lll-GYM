@@ -1,185 +1,176 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class HorarioClases extends JFrame {
-    private static final long serialVersionUID = 1L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<String> clasesSeleccionadas;
+    private JButton btnVerInscripciones, btnCerrar;
     private JTable tablaHorario;
-    private DefaultTableModel modeloHorario;
-    private JButton btnInscribirse, btnCerrar;
-
-    // Lista para almacenar las celdas seleccionadas (día y hora)
-    private ArrayList<int[]> celdasSeleccionadas;
 
     public HorarioClases() {
+        clasesSeleccionadas = new ArrayList<>();
+
         setTitle("Horario de Clases");
-        setSize(900, 500);
+        setSize(1000, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Inicializar la lista de celdas seleccionadas
-        celdasSeleccionadas = new ArrayList<>();
+        JPanel panelTabla = crearPanelTablaHorario();
+        add(panelTabla, BorderLayout.CENTER);
 
-        // Crear paneles para organizar los componentes de la ventana
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
-        JPanel panelBotones = new JPanel(new BorderLayout());
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-        // Crear encabezados y datos de ejemplo para la tabla de horario
+        btnVerInscripciones = new JButton("Ver Inscripciones");
+        btnVerInscripciones.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        panelBotones.add(btnVerInscripciones);
+
+        btnCerrar = new JButton("Cerrar");
+        btnCerrar.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        panelBotones.add(btnCerrar);
+
+        add(panelBotones, BorderLayout.SOUTH);
+
+        btnVerInscripciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarVentanaInscripciones();
+            }
+        });
+
+        btnCerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        setVisible(true);
+    }
+
+    private JPanel crearPanelTablaHorario() {
+        JPanel panel = new JPanel(new BorderLayout());
+
         String[] columnas = {"Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
         String[][] datos = {
-            {"08:00 - 09:00", "Yoga", "Pilates", "Spinning", "Yoga", "HIIT"},
-            {"09:00 - 10:00", "Cardio", "Yoga", "Spinning", "Zumba", "Boxeo"},
-            {"10:00 - 11:00", "Crossfit", "Pilates", "Cardio", "Crossfit", "Zumba"},
-            {"11:00 - 12:00", "Zumba", "HIIT", "Yoga", "Boxeo", "Spinning"},
-            {"12:00 - 13:00", "Spinning", "Crossfit", "Pilates", "HIIT", "Yoga"},
-            {"13:00 - 14:00", "Boxeo", "Zumba", "Crossfit", "Pilates", "Cardio"},
+            {"08:00 - 09:00", "Yoga", "Pilates", "Spinning", "Body Pump", "HIIT"},
+            {"09:00 - 10:00", "Cardio", "Yoga", "TRX", "Zumba", "Boxeo"},
+            {"10:00 - 11:00", "Crossfit", "Body Pump", "Cardio", "Crossfit", "Stretching"},
+            {"11:00 - 12:00", "Zumba", "HIIT", "Power Yoga", "Boxeo", "Spinning"},
+            {"12:00 - 13:00", "Spinning", "Crossfit", "TRX", "HIIT", "Body Pump"},
+            {"13:00 - 14:00", "Boxeo", "Zumba", "Stretching", "Pilates", "Cardio"},
+            {"14:00 - 15:00", "Descanso", "Descanso", "Descanso", "Descanso", "Descanso"},
+            {"15:00 - 16:00", "Yoga", "Body Pump", "Spinning", "TRX", "HIIT"},
+            {"16:00 - 17:00", "Cardio", "Yoga", "Spinning", "Zumba", "Body Combat"},
+            {"17:00 - 18:00", "Crossfit", "TRX", "Cardio", "Crossfit", "Stretching"},
+            {"18:00 - 19:00", "Body Combat", "HIIT", "Yoga", "Boxeo", "Spinning"},
+            {"19:00 - 20:00", "Power Yoga", "Crossfit", "Pilates", "HIIT", "TRX"},
+            {"20:00 - 21:00", "Boxeo", "Zumba", "Crossfit", "Pilates", "Cardio"},
+            {"21:00 - 22:00", "HIIT", "Stretching", "Boxeo", "Cardio", "Body Pump"},
         };
 
-        // Crear modelo y tabla para el horario
-        modeloHorario = new DefaultTableModel(datos, columnas);
-        tablaHorario = new JTable(modeloHorario) {
+        DefaultTableModel modeloTabla = new DefaultTableModel(datos, columnas) {
+            @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Hacer que las celdas no sean editables
+                return false; // Las celdas no son editables
             }
         };
 
-        tablaHorario.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-        tablaHorario.setRowHeight(30);
+        tablaHorario = new JTable(modeloTabla);
+        tablaHorario.setCellSelectionEnabled(true);
+        tablaHorario.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        // Añadir un renderizador de celda personalizado para cambiar el color de las celdas seleccionadas
+        // Cambia el color de las clases seleccionadas
         tablaHorario.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                // Cambiar color de las celdas seleccionadas a amarillo
-                if (isCeldaSeleccionada(row, column)) {
-                    comp.setBackground(Color.YELLOW);
+                
+                // No permitir seleccionar clases de descanso
+                if (value.equals("Descanso")) {
+                    comp.setBackground(Color.LIGHT_GRAY);
+                } else if (clasesSeleccionadas.contains(value + " - " + table.getColumnName(column) + " a las " + table.getValueAt(row, 0))) {
+                    comp.setBackground(Color.GREEN);
                 } else {
                     comp.setBackground(Color.WHITE);
                 }
-
                 return comp;
             }
         });
 
-        // Permitir solo selección de celdas individuales en la tabla
-        tablaHorario.setCellSelectionEnabled(true);
-        tablaHorario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaHorario.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                int[] filasSeleccionadas = tablaHorario.getSelectedRows();
+                int[] columnasSeleccionadas = tablaHorario.getSelectedColumns();
 
-        // Listener para manejar la selección de celdas y añadirlas a la lista
-        tablaHorario.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-                int fila = tablaHorario.getSelectedRow();
-                int columna = tablaHorario.getSelectedColumn();
-
-                // Ignorar si la selección es inválida o si selecciona la columna de "Hora"
-                if (fila >= 0 && columna > 0) {
-                    agregarClaseSeleccionada(fila, columna);
+                for (int fila : filasSeleccionadas) {
+                    for (int columna : columnasSeleccionadas) {
+                        if (columna > 0) {
+                            String clase = (String) modeloTabla.getValueAt(fila, columna);
+                            String hora = (String) modeloTabla.getValueAt(fila, 0);
+                            String dia = modeloTabla.getColumnName(columna);
+                            String claseCompleta = clase + " - " + dia + " a las " + hora;
+                            // No permitir seleccionar clase de descanso
+                            if (!clase.equals("Descanso")) {
+                                if (clasesSeleccionadas.contains(claseCompleta)) {
+                                    clasesSeleccionadas.remove(claseCompleta);
+                                } else {
+                                    clasesSeleccionadas.add(claseCompleta);
+                                }
+                            }
+                        }
+                    }
                 }
+                tablaHorario.repaint();
             }
         });
 
-        // Crear el botón "Inscribirse en Clases Seleccionadas"
-        btnInscribirse = new JButton("Inscribirse en Clases Seleccionadas");
-        btnInscribirse.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        JScrollPane scrollTabla = new JScrollPane(tablaHorario);
+        panel.add(scrollTabla, BorderLayout.CENTER);
 
-        // Crear el botón "Cerrar" y agregarlo a la parte inferior derecha
-        btnCerrar = new JButton("Cerrar");
-        btnCerrar.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-        panelBotones.add(btnCerrar, BorderLayout.EAST);
-        
-        // Listener para el botón "Cerrar"
-        btnCerrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Cierra la ventana actual de HorarioClases
-            }
-        });
-
-        // Añadir el botón de inscripción al panel de botones en el centro
-        panelBotones.add(btnInscribirse, BorderLayout.CENTER);
-
-        // Listener para el botón de "Inscribirse"
-        btnInscribirse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                inscribirEnClases();
-            }
-        });
-
-        // Añadir la tabla de horario y el panel de botones al panel principal
-        panelPrincipal.add(tablaHorario.getTableHeader(), BorderLayout.NORTH);
-        panelPrincipal.add(tablaHorario, BorderLayout.CENTER);
-        panelPrincipal.add(panelBotones, BorderLayout.SOUTH);
-
-        // Añadir el panel principal al JFrame
-        add(panelPrincipal);
-        setVisible(true);
+        return panel;
     }
 
-    // Método para agregar una clase a la lista de seleccionadas y actualizar la tabla
-    private void agregarClaseSeleccionada(int fila, int columna) {
-        // Verificar si la clase ya está seleccionada
-        if (!isCeldaSeleccionada(fila, columna)) {
-            celdasSeleccionadas.add(new int[]{fila, columna});
-            tablaHorario.repaint(); // Refrescar la tabla para mostrar la selección
+    private void mostrarVentanaInscripciones() {
+        JFrame ventanaInscripciones = new JFrame("Clases Inscritas");
+        ventanaInscripciones.setSize(300, 200);
+        ventanaInscripciones.setLocationRelativeTo(null);
+
+        JPanel panelInscripciones = new JPanel();
+        panelInscripciones.setLayout(new BoxLayout(panelInscripciones, BoxLayout.Y_AXIS));
+
+        JScrollPane scrollPane = new JScrollPane(panelInscripciones);
+        scrollPane.setPreferredSize(new Dimension(280, 150));
+
+        if (clasesSeleccionadas.isEmpty()) {
+            panelInscripciones.add(new JLabel("No estás inscrito en ninguna clase."));
         } else {
-            // Mensaje de advertencia si la clase ya está seleccionada
-            JOptionPane.showMessageDialog(this, "La clase ha sido seleccionada.", "Clase Seleccionada", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
-    // Método para verificar si una celda está seleccionada
-    private boolean isCeldaSeleccionada(int fila, int columna) {
-        for (int[] celda : celdasSeleccionadas) {
-            if (celda[0] == fila && celda[1] == columna) {
-                return true;
+            for (String clase : clasesSeleccionadas) {
+                panelInscripciones.add(new JLabel(clase));
             }
         }
-        return false;
+
+        ventanaInscripciones.add(scrollPane, BorderLayout.CENTER);
+
+        JButton btnCerrarVentana = new JButton("Cerrar");
+        btnCerrarVentana.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ventanaInscripciones.dispose();
+            }
+        });
+        ventanaInscripciones.add(btnCerrarVentana, BorderLayout.SOUTH);
+
+        ventanaInscripciones.setVisible(true);
     }
-
-    // Método para inscribir al usuario en las clases seleccionadas
-    private void inscribirEnClases() {
-        // Validar que haya celdas seleccionadas
-        if (celdasSeleccionadas.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una o más clases para inscribirse.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Mensaje de confirmación para cada clase seleccionada
-        StringBuilder mensaje = new StringBuilder("Inscripción exitosa en las siguientes clases:\n");
-        for (int[] celda : celdasSeleccionadas) {
-            String clase = (String) modeloHorario.getValueAt(celda[0], celda[1]);
-            String dia = tablaHorario.getColumnName(celda[1]);
-            String hora = (String) modeloHorario.getValueAt(celda[0], 0);
-            mensaje.append("- ").append(clase).append(" el ").append(dia).append(" a las ").append(hora).append("\n");
-        }
-
-        JOptionPane.showMessageDialog(this, mensaje.toString(), "Confirmación de Inscripción", JOptionPane.INFORMATION_MESSAGE);
-
-        // Limpiar la lista de clases seleccionadas y actualizar la tabla
-        celdasSeleccionadas.clear();
-        tablaHorario.repaint();
-    }
-
 }

@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -238,7 +240,7 @@ public class VentanaInicial extends JFrame{
         		HorarioClases insertar = new HorarioClases();		
         	}
         });
-        
+   
     }
     //Confirmacion de cierre de ventana
   	private void confirmWindowClosing() {
