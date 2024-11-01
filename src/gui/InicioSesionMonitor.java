@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -85,7 +86,7 @@ public class InicioSesionMonitor extends JFrame{
 		pCentro.add(lblAutorizacionMonitor);
 		pCentro.add(txtAutorizacionMonitor);
 		pNorte.add(btnAtras);
-		
+				
 		// Listener para el botón de "Cerrar Sesión"
         btnAtras.addActionListener(new ActionListener() {
             @Override
@@ -107,6 +108,9 @@ public class InicioSesionMonitor extends JFrame{
             }
         });
 		
+        //Cambiar el icono de la ventana (Esquina superior izquierda)
+      	ImageIcon imagen = new ImageIcon("img/icono.png");
+      	setIconImage(imagen.getImage());
         
         //Hacer visible todo
 		setVisible(true);
@@ -154,9 +158,14 @@ public class InicioSesionMonitor extends JFrame{
         JButton btnCerrarSesion = new JButton("Cerrar Sesión");
         btnCerrarSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         
+        //Inicializacion del boton informacion monitoress
+      	JButton botonMonitores = new JButton("Informacion Monitores");
+      	botonMonitores.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        
         // Panel para el botón en la parte superior derecha
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSuperior.add(btnCerrarSesion);
+        panelSuperior.add(botonMonitores);
         
         // Añadir el panel y la etiqueta a la nueva ventana
         nuevaVentana.add(panelSuperior, BorderLayout.NORTH);
@@ -170,6 +179,13 @@ public class InicioSesionMonitor extends JFrame{
                 vActual.setVisible(true);  // Mostrar de nuevo la ventana de inicio de sesión
             }
         });
+        
+        botonMonitores.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		InformacionMonitores insertar = new InformacionMonitores();		
+        	}
+        }); 
 	}
 	
 	//Confirmacion de cierre de ventana

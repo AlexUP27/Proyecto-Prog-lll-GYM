@@ -55,7 +55,4 @@ public class InformacionMonitores extends JFrame{
 		
 		setVisible(true);
 	}
-	public static void main(String[] args) {
-		InformacionMonitores i = new InformacionMonitores(); 
-	}
 }

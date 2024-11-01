@@ -201,14 +201,9 @@ public class VentanaInicial extends JFrame{
       	JButton botonClientes = new JButton("Informacion Clientes");
       	botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
       	
-      	//Inicializacion del boton informacion monitoress
-      	JButton botonMonitores = new JButton("Informacion Monitores");
-      	botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-      	
       	// Panel para el botón en la parte superior derecha
       	JPanel panelSuperior2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelSuperior2.add(botonClientes);
-        panelSuperior2.add(botonMonitores);
         
         // Añadir el panel a la nueva ventana
         nuevaVentana.add(panelSuperior2, BorderLayout.SOUTH);
@@ -221,15 +216,29 @@ public class VentanaInicial extends JFrame{
         	public void actionPerformed(ActionEvent e) {
         		InformacionClientes insertar = new InformacionClientes();		
         	}
-        }); 
+        });
         
-        botonMonitores.addActionListener(new ActionListener() {
+      //Inicializacion del boton horario clases
+      	JButton botonHorario = new JButton("Horario Clases");
+      	botonHorario.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+      	
+      	// Panel para el botón en la parte superior derecha
+      	JPanel panelSuperior3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+      	panelSuperior3.add(botonHorario);
+        
+        // Añadir el panel a la nueva ventana
+        nuevaVentana.add(panelSuperior3, BorderLayout.SOUTH);
+        nuevaVentana.setVisible(true);
+        
+        //Listener y posicion del boton horario clases
+        botonHorario.addActionListener(new ActionListener() {
         	
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		InformacionMonitores insertar = new InformacionMonitores();		
+        		HorarioClases insertar = new HorarioClases();		
         	}
-        }); 
+        });
+        
     }
     //Confirmacion de cierre de ventana
   	private void confirmWindowClosing() {
