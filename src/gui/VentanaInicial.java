@@ -235,6 +235,18 @@ public class VentanaInicial extends JFrame {
         botonHorario.setForeground(Color.WHITE);
         botonHorario.setFocusPainted(false); // Sin borde al seleccionar
         panelInferior.add(botonHorario);
+        
+        //Inicializacion del boton "Gestion de Pagos"
+        JButton botonPagos = new JButton("Gestion de Pagos");
+        botonPagos.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        botonPagos.setBackground(Color.BLUE);
+        botonPagos.setForeground(Color.WHITE);
+        botonPagos.setFocusPainted(false); // Sin borde al seleccionar
+        panelInferior.add(botonPagos);
+        // Panel para boton gestion de pagos
+        JPanel panelBotonesClientes = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelBotonesClientes.add(botonPagos);
+        panelPrincipal.add(panelBotonesClientes, BorderLayout.CENTER);
 
         // Añadir el panel inferior al panel principal
         panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
@@ -265,6 +277,14 @@ public class VentanaInicial extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HorarioClases insertar = new HorarioClases();
+            }
+        });
+        
+        // Listener y posición del botón "Gestión de Pagos"
+        botonPagos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestionPagos gestionPagos = new GestionPagos();
             }
         });
     }

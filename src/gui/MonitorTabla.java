@@ -74,7 +74,7 @@ public class MonitorTabla extends AbstractTableModel{
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return true;
+		return false;
 	}
 	
 }
