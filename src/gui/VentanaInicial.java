@@ -247,6 +247,16 @@ public class VentanaInicial extends JFrame {
         JPanel panelBotonesClientes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBotonesClientes.add(botonPagos);
         panelPrincipal.add(panelBotonesClientes, BorderLayout.CENTER);
+        
+        // Botón de Entrenamiento
+        JButton btnEntrenamiento = new JButton("Entrenamiento");
+        btnEntrenamiento.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        btnEntrenamiento.setBackground(Color.BLUE);
+        btnEntrenamiento.setForeground(Color.WHITE);
+        btnEntrenamiento.setFocusPainted(false); // Sin borde al seleccionar
+
+        // Agregar al panel de botones
+        panelBotonesClientes.add(btnEntrenamiento);
 
         // Añadir el panel inferior al panel principal
         panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
@@ -285,6 +295,15 @@ public class VentanaInicial extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GestionPagos gestionPagos = new GestionPagos();
+            }
+        });
+        
+        // Acción del botón de Entrenamiento
+        btnEntrenamiento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
+                vActual.setVisible(false);
             }
         });
     }

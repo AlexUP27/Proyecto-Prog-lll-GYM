@@ -107,16 +107,16 @@ public class GestionPagos extends JFrame {
     }
     
     private void agregarPago() {
-        String monto = txtMonto.getText();
+        String cantidad = txtMonto.getText();
         String metodo = (String) cmbMetodoPago.getSelectedItem();
         
-        if (monto.isEmpty()) {
+        if (cantidad.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese la cantidad que desee.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // Agregar el pago al historial
-        String detallePago = "Cantidad: " + monto + ", Método: " + metodo + ", Fecha: " + new Date();
+        String detallePago = "Cantidad: " + cantidad + ", Método: " + metodo + ", Fecha: " + new Date();
         historialPagos.add(detallePago);
         
         // Actualizar el historial de pagos
