@@ -221,7 +221,7 @@ public class VentanaInicial extends JFrame {
         panelInferior.setBackground(Color.WHITE);
 
         // Inicialización del botón "Información Clientes"
-        JButton botonClientes = new JButton("Información Clientes");
+        JButton botonClientes = new JButton("Gestion Clientes");
         botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         botonClientes.setBackground(Color.BLUE);
         botonClientes.setForeground(Color.WHITE);
@@ -278,7 +278,7 @@ public class VentanaInicial extends JFrame {
         botonClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InformacionClientes insertar = new InformacionClientes();
+                ClientesBd insertar = new ClientesBd();
             }
         });
 
