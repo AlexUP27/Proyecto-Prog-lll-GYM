@@ -20,7 +20,6 @@ public class InformacionMonitores extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	public InformacionMonitores() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Informacion Monitor");
 		setSize(400,300);
 		
@@ -34,7 +33,6 @@ public class InformacionMonitores extends JFrame{
 				new Monitor(116, "Iker", "Ruiz", "Iker.Ruiz@gmail.com", 27, "Crossfit", 694846726)
 				);
 		
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setTitle("Informacion de monitores");
 		setSize(600, 400);
 		
