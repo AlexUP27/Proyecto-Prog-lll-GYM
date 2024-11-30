@@ -207,7 +207,7 @@ public class InicioSesionMonitor extends JFrame{
 	    panelPrincipal.add(lblMensaje, BorderLayout.CENTER);
 
 	    // Crear un botón de "Información Monitores" y colocarlo en la parte inferior
-	    JButton botonMonitores = new JButton("Información Monitores");
+	    JButton botonMonitores = new JButton("Gestion Monitores");
 	    botonMonitores.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 	    botonMonitores.setBackground(Color.BLUE);
 	    botonMonitores.setForeground(Color.WHITE);
@@ -240,7 +240,7 @@ public class InicioSesionMonitor extends JFrame{
 	    botonMonitores.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            InformacionMonitores insertar = new InformacionMonitores();		
+	            MonitorBd insertar = new MonitorBd();		
 	        }
 	    });
 	}
