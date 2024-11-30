@@ -3,10 +3,7 @@ package gui;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-
-import bin.Cliente;
 import bin.Monitor;
-import bin.Cliente.Genre;
 
 public class MonitorTabla extends AbstractTableModel{
 	/**

@@ -10,7 +10,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class ClientesBd extends JFrame {
 
-    // Constructor que configura la ventana principal
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	// Constructor que configura la ventana principal
     public ClientesBd() {
         // Configurar la ventana JFrame
         setTitle("Gestión de Clientes");

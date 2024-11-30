@@ -8,7 +8,11 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 public class VentanaInicial extends JFrame {
-    // Declaración de los componentes botón
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// Declaración de los componentes botón
     private JButton btnInicioSesion, btnCierreSesion, botonMonitor;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
@@ -243,20 +247,31 @@ public class VentanaInicial extends JFrame {
         botonPagos.setForeground(Color.WHITE);
         botonPagos.setFocusPainted(false); // Sin borde al seleccionar
         panelInferior.add(botonPagos);
+        
         // Panel para boton gestion de pagos
         JPanel panelBotonesClientes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBotonesClientes.add(botonPagos);
         panelPrincipal.add(panelBotonesClientes, BorderLayout.CENTER);
         
-        // Botón de Entrenamiento
+        //Inicializacion del boton "Boton de Entrenamiento"
         JButton btnEntrenamiento = new JButton("Entrenamiento");
         btnEntrenamiento.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         btnEntrenamiento.setBackground(Color.BLUE);
         btnEntrenamiento.setForeground(Color.WHITE);
         btnEntrenamiento.setFocusPainted(false); // Sin borde al seleccionar
-
-        // Agregar al panel de botones
+        
+        // Agregar al panel de botones el boton de entrenamiento
         panelBotonesClientes.add(btnEntrenamiento);
+        
+        //Inicializacion del boton "Seguimiento de Progreso"
+        JButton btnSeguimientoProgreso = new JButton("Seguimiento de Progreso");
+        btnSeguimientoProgreso.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        btnSeguimientoProgreso.setBackground(Color.BLUE);
+        btnSeguimientoProgreso.setForeground(Color.WHITE);
+        btnSeguimientoProgreso.setFocusPainted(false); // Sin borde al seleccionar
+        
+        // Agregar al panel de botones el boton de Seguimiento de Progreso
+        panelBotonesClientes.add(btnSeguimientoProgreso);
 
         // Añadir el panel inferior al panel principal
         panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
@@ -298,12 +313,20 @@ public class VentanaInicial extends JFrame {
             }
         });
         
-        // Acción del botón de Entrenamiento
+        // Listener y posición del botón de "Entrenamiento"
         btnEntrenamiento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
                 vActual.setVisible(false);
+            }
+        });
+        
+        // Listener y posición del botón de "Seguimiento de Progreso"
+        btnSeguimientoProgreso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	SeguimientoProgreso seguimientoProgreso = new SeguimientoProgreso();
             }
         });
     }

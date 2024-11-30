@@ -2,8 +2,6 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +69,7 @@ public class VentanaEntrenamientos extends JFrame {
         ));
         
         btnFlexibilidad.addActionListener(e -> abrirVentanaEjercicios("Flexibilidad", 
-            Arrays.asList("Yoga", "Estiramiento de Piernas", "Puente"),
+            Arrays.asList("Estiramiento de Piernas", "Estiramiento de Hombros", "Estiramiento del Gato", "Estiramiento de Cuádriceps", "Estiramiento de Espalda Baja"),
             crearDetallesFlexibilidad(),
             crearImagenesFlexibilidad(),
             crearBrevesFlexibilidad()
@@ -87,10 +85,10 @@ public class VentanaEntrenamientos extends JFrame {
 	private Map<String, String> crearDetallesFuerza() {
 	    Map<String, String> detalles = new HashMap<>();
 	    detalles.put("Sentadillas con Peso", "1. Coloca los pies separados al ancho de los hombros.\n2. Sostén una barra o mancuernas sobre los hombros o en la espalda.\n3. Mantén el pecho hacia arriba y la espalda recta durante todo el movimiento.\n4. Baja lentamente como si estuvieras sentándote en una silla.\n5. Detente cuando las rodillas formen un ángulo de 90 grados.\n6. Empuja hacia arriba usando los talones para volver a la posición inicial.\n");
-	    detalles.put("Press de Banca", "1. Acuéstate en un banco con los pies firmemente apoyados en el suelo, 2. Sostén la barra con las manos separadas un poco más del ancho de los hombros, 3. Baja la barra lentamente hacia el pecho mientras mantienes los codos hacia afuera, 4. Empuja la barra hacia arriba, extendiendo completamente los brazos, 5. Mantén el control durante todo el movimiento");
-	    detalles.put("Peso Muerto", "1. Coloca los pies debajo de la barra, separados al ancho de los hombros, 2. Agarra la barra con ambas manos (agarre alterno o pronado), 3. Mantén la espalda recta y el pecho levantado, 4. Levanta la barra extendiendo las piernas y las caderas al mismo tiempo, 5. Baja la barra controladamente manteniendo una buena postura");
-	    detalles.put("Dominadas", "1. Agarra la barra con las manos separadas al ancho de los hombros, 2. Mantén el cuerpo recto y los pies juntos, 3. Tira del cuerpo hacia arriba hasta que la barbilla pase por encima de la barra, 4. Baja lentamente a la posición inicial, 5. Evita balancear el cuerpo para mantener la forma");
-	    detalles.put("Remo con Barra", "1. Coloca los pies separados al ancho de los hombros, 2. Agarra la barra con un agarre pronado o supinado, con las manos ligeramente más anchas que los hombros, 3. Inclina el torso hacia adelante manteniendo la espalda recta, 4. Lleva la barra hacia el abdomen contrayendo los músculos de la espalda, 5. Baja la barra controladamente a la posición inicial");
+	    detalles.put("Press de Banca", "1. Acuéstate en un banco con los pies firmemente apoyados en el suelo. \n2. Sostén la barra con las manos separadas un poco más del ancho de los hombros. \n3. Baja la barra lentamente hacia el pecho mientras mantienes los codos hacia afuera. \n4. Empuja la barra hacia arriba, extendiendo completamente los brazos. \n5. Mantén el control durante todo el movimiento");
+	    detalles.put("Peso Muerto", "1. Coloca los pies debajo de la barra, separados al ancho de los hombros. \n2. Agarra la barra con ambas manos (agarre alterno o pronado). \n3. Mantén la espalda recta y el pecho levantado. \n4. Levanta la barra extendiendo las piernas y las caderas al mismo tiempo. \n5. Baja la barra controladamente manteniendo una buena postura");
+	    detalles.put("Dominadas", "1. Agarra la barra con las manos separadas al ancho de los hombros. \n2. Mantén el cuerpo recto y los pies juntos. \n3. Tira del cuerpo hacia arriba hasta que la barbilla pase por encima de la barra. \n4. Baja lentamente a la posición inicial. \n5. Evita balancear el cuerpo para mantener la forma");
+	    detalles.put("Remo con Barra", "1. Coloca los pies separados al ancho de los hombros. \n2. Agarra la barra con un agarre pronado o supinado, con las manos ligeramente más anchas que los hombros. \n3. Inclina el torso hacia adelante manteniendo la espalda recta. \n4. Lleva la barra hacia el abdomen contrayendo los músculos de la espalda. \n5. Baja la barra controladamente a la posición inicial");
 	    return detalles;
 	}
 
@@ -110,32 +108,40 @@ public class VentanaEntrenamientos extends JFrame {
         imagenes.put("Press de Banca", "img/press_banca.jpg");
         imagenes.put("Sentadillas con Peso", "img/sentadillas.jpeg");
         imagenes.put("Peso Muerto", "img/peso_muerto.jpeg");
-        imagenes.put("Peso Muerto", "img/peso_muerto.jpeg"); //Cambiar foto
-        imagenes.put("Peso Muerto", "img/peso_muerto.jpeg"); //Cambiar foto
+        imagenes.put("Dominadas", "img/peso_muerto.jpeg"); //Cambiar foto
+        imagenes.put("Remo con Mancuernas", "img/peso_muerto.jpeg"); //Cambiar foto
         return imagenes;
     }
 
     private Map<String, String> crearDetallesFlexibilidad() {
         Map<String, String> detalles = new HashMap<>();
-        detalles.put("Yoga", "El yoga combina flexibilidad y meditación.");
-        detalles.put("Estiramiento de Piernas", "Aumenta el rango de movimiento en las piernas.");
-        detalles.put("Puente", "Fortalece y flexibiliza la columna y caderas.");
+
+        detalles.put("Estiramiento de Piernas", "1. Siéntate en el suelo con las piernas estiradas hacia adelante. \n2. Inclina el torso hacia adelante alcanzando los pies con las manos. \n3. Mantén la espalda recta mientras sientes el estiramiento en los isquiotibiales. \n4. Mantén esta posición durante 20-30 segundos.");
+        detalles.put("Estiramiento de Hombros", "1. Cruza un brazo frente al cuerpo y agárralo con la mano opuesta. \n2. Empuja suavemente hacia el cuerpo hasta sentir un estiramiento en el hombro. \n3. Mantén esta posición durante 20-30 segundos y cambia de lado.");
+        detalles.put("Estiramiento del Gato", "1. Colócate en posición de cuatro patas. \n2. Arquea la espalda hacia arriba como un gato estirándose. \n3. Baja la espalda hacia abajo mientras levantas la cabeza y el coxis. \n4. Repite el movimiento de forma controlada durante 10-15 repeticiones.");
+        detalles.put("Estiramiento de Cuádriceps", "1. Párate derecho y flexiona una pierna hacia atrás agarrándote el pie con la mano. \n2. Tira suavemente del pie hacia los glúteos sintiendo el estiramiento en el cuádriceps. \n3. Mantén esta posición durante 20-30 segundos y cambia de pierna.");
+        detalles.put("Estiramiento de Espalda Baja", "1. Acuéstate boca arriba con las piernas dobladas y los pies apoyados en el suelo. \n2. Lleva ambas rodillas hacia el pecho abrazándolas con las manos. \n3. Mantén esta posición durante 20-30 segundos. \n4. Relaja y repite si es necesario.");
         return detalles;
     }
     
     private Map<String, String> crearBrevesFlexibilidad() {
         Map<String, String> breves = new HashMap<>();
-        breves.put("Yoga", "Una excelente forma de mejorar tu resistencia.");
-        breves.put("Estiramiento de Piernas", "Ideal para fortalecer piernas y glúteos.");
-        breves.put("Puente", "Ejercicio de bajo impacto para todo el cuerpo.");
+        breves.put("Estiramiento de Piernas", "Un clásico estiramiento para mejorar la flexibilidad de los isquiotibiales.");  
+        breves.put("Estiramiento de Hombros", "Perfecto para liberar la tensión acumulada en los hombros.");
+        breves.put("Estiramiento del Gato", "Un movimiento dinámico ideal para relajar la espalda y la columna vertebral.");
+        breves.put("Estiramiento de Cuádriceps", "Sencillo y efectivo para relajar los músculos del muslo.");
+        breves.put("Estiramiento de Espalda Baja", "Ayuda a aliviar la tensión en la zona lumbar de forma suave.");
         return breves;
     }
 
+
     private Map<String, String> crearImagenesFlexibilidad() {
         Map<String, String> imagenes = new HashMap<>();
-        imagenes.put("Yoga", "img/yoga.jpeg");
-        imagenes.put("Estiramiento de Piernas", "img/estiramiento.jpeg");
-        imagenes.put("Puente", "img/puente.jpeg");
+        imagenes.put("Estiramiento de Piernas", "img/yoga.jpeg"); //Cambiar foto
+        imagenes.put("Estiramiento de Hombros", "img/estiramiento.jpeg"); //Cambiar foto
+        imagenes.put("Estiramiento del Gato", "img/puente.jpeg"); //Cambiar foto
+        imagenes.put("Estiramiento de Cuádriceps", "img/puente.jpeg"); //Cambiar foto
+        imagenes.put("Estiramiento de Espalda Baja", "img/puente.jpeg"); //Cambiar foto
         return imagenes;
     }
     
