@@ -13,7 +13,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Declaración de los componentes botón
-    private JButton btnInicioSesion, btnCierreSesion, botonMonitor;
+    private JButton btnInicioSesion, btnCierreSesion, botonMonitor, btnRegistro;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
     // Declaración de los componente cuadro de texto
@@ -98,9 +98,20 @@ public class VentanaInicial extends JFrame {
         btnInicioSesion.setFocusPainted(false);
         gbc.gridx = 0;
         gbc.gridy++;
-        gbc.gridwidth = 2; // Ocupa 2 columnas
+        gbc.gridwidth = 1; // Ocupa 2 columnas
         gbc.fill = GridBagConstraints.HORIZONTAL;
         pCentro.add(btnInicioSesion, gbc);
+        
+     // Inicialización del botón de registro
+        btnRegistro = new JButton("REGISTRARSE");
+        btnRegistro.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        btnRegistro.setBackground(Color.ORANGE);
+        btnRegistro.setForeground(Color.WHITE);
+        btnRegistro.setFocusPainted(false);
+        gbc.gridx = 1;  // Segunda columna, misma fila
+        gbc.gridy = gbc.gridy; // Mismo nivel que el botón de inicio de sesión
+        gbc.gridwidth = 1; // Ocupa una sola columna
+        pCentro.add(btnRegistro, gbc);
 
         // Inicialización del botón de monitor
         botonMonitor = new JButton("Monitor");
@@ -137,6 +148,14 @@ public class VentanaInicial extends JFrame {
                 } else {
                     panelDeBienvenida(user);
                 }
+            }
+        });
+        
+     // Listener para el botón de "Registrarse"
+        btnRegistro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VentanaRegistro ventanaRegistro = new VentanaRegistro();
             }
         });
 
