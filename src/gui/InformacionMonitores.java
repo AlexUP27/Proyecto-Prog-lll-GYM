@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import bin.Monitor;
+import domain.Monitor;
 
 public class InformacionMonitores extends JFrame{
 

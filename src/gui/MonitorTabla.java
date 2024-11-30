@@ -1,9 +1,8 @@
 package gui;
 
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-import bin.Monitor;
+import domain.Monitor;
 
 public class MonitorTabla extends AbstractTableModel{
 	/**
