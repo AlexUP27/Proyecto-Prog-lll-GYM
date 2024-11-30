@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import bin.Cliente;
-import bin.Monitor;
-import bin.Cliente.Genre;
+import domain.Monitor;
 
 public class MonitorTabla extends AbstractTableModel{
 	/**
