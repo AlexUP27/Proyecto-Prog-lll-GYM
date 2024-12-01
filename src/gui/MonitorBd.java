@@ -6,7 +6,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class MonitorBd extends JFrame {
 
-    public MonitorBd() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public MonitorBd() {
         setTitle("Gestión de Monitores");
         setBounds(10, 10, 800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

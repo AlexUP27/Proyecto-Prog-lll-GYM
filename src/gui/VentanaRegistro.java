@@ -114,6 +114,8 @@ public class VentanaRegistro extends JFrame {
                 }
             }
         });
+        
+        // 3 intento commit y push
 
         // Añadir paneles al frame
         add(panelPrincipal, BorderLayout.CENTER);
