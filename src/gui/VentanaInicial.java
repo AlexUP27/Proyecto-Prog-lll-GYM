@@ -354,6 +354,7 @@ public class VentanaInicial extends JFrame {
             }
         });
     }
+    //solucionar proble con el push y commit
 
 
     
