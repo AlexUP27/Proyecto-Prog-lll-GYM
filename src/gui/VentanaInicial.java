@@ -144,37 +144,30 @@ public class VentanaInicial extends JFrame {
         getContentPane().add(pCentro, BorderLayout.CENTER);
 
      // Añadimos los listeners
-        btnInicioSesion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String user = txtNombreUsuario.getText();
-                String contrasena = new String(txtContraseniaUsuario.getPassword());
+        btnInicioSesion.addActionListener(e -> {
+            String user = txtNombreUsuario.getText();
+            String contrasena = new String(txtContraseniaUsuario.getPassword());
 
-                //Verificar si los campos están vacios
-                if (user.isEmpty() || contrasena.isEmpty()) {
-                    JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            // Verificar si los campos están vacíos
+            if (user.isEmpty() || contrasena.isEmpty()) {
+                JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-                //Verificar si los datos coinciden con los de la base de datos
-                if (usuarioValido(user, contrasena)) {
-                    panelDeBienvenida(user);
-                } else {
-                    // Mostrar error en caso de que no coincidan
-                    JOptionPane.showMessageDialog(vActual, "Error al iniciar sesión. Compruebe si los datos están bien escritos. Si no está registrado, pulse el botón de registro para hacerlo.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-                }
+            // Verificar si los datos coinciden con los de la base de datos
+            if (usuarioValido(user, contrasena)) {
+                panelDeBienvenida(user);
+            } else {
+                // Mostrar error en caso de que no coincidan
+                JOptionPane.showMessageDialog(vActual, "Error al iniciar sesión. Compruebe si los datos están bien escritos. Si no está registrado, pulse el botón de registro para hacerlo.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
             }
         });
+
 
         
      // Listener para el botón de "Registrarse"
-        btnRegistro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new VentanaRegistro();
-            }
-        });
-
+        btnRegistro.addActionListener(e -> new VentanaRegistro());
+        
         setVisible(true);
     }
 	
@@ -235,13 +228,11 @@ public class VentanaInicial extends JFrame {
         frameDeBienvenida.setVisible(true);
 
         // Temporizador para que desaparezca la ventana de bienvenida al de 3 segundos 
-        Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frameDeBienvenida.dispose();  // Cierra la ventana
-                openNewWindow(); 
-            }
+        Timer timer = new Timer(2000, e -> {
+            frameDeBienvenida.dispose();  // Cierra la ventana
+            openNewWindow();
         });
+
         timer.setRepeats(false);  // Poner el temporizador
         timer.start();            // Empieza el temporizador
 
@@ -342,63 +333,35 @@ public class VentanaInicial extends JFrame {
         nuevaVentana.setVisible(true);
 
         // Listener para el botón de "Cerrar Sesión"
-        btnCerrarSesion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                nuevaVentana.dispose();  // Cerrar la nueva ventana
-                vActual.setVisible(true); // Mostrar de nuevo la ventana de inicio de sesión
-            }
+        btnCerrarSesion.addActionListener(e -> {
+            nuevaVentana.dispose();  // Cerrar la nueva ventana
+            vActual.setVisible(true); // Mostrar de nuevo la ventana de inicio de sesión
         });
+
 
         // Listener y posición del botón "Información Clientes"
-        botonClientes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ClientesBd();
-            }
-        });
-        //
-
+        botonClientes.addActionListener(e -> new ClientesBd());
+        
         // Listener y posición del botón "Horario Clases"
-        botonHorario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
-            	HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
-            	// Hacer visible la ventana
-                ventanaHorarios.setVisible(true);
-                // Opcional: Puedes hacer invisible la ventana principal si lo deseas
-                vActual.setVisible(false);
-            }
+        botonHorario.addActionListener(e -> {
+            ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
+            HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
+            ventanaHorarios.setVisible(true); // Hacer visible la ventana
+            vActual.setVisible(false); // Hacer invisible la ventana principal
         });
         
-        // Listener y posición del botón "Gestión de Pagos"
-        botonPagos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new GestionPagos();
-            }
-        });
-        
-        // Listener y posición del botón de "Entrenamiento"
-        btnEntrenamiento.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
-                vActual.setVisible(false);
-            }
-        });
-        
-        // Listener y posición del botón de "Seguimiento de Progreso"
-        btnSeguimientoProgreso.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	new SeguimientoProgreso();
-            }
-        });
-    }
-    //solucionar proble con el push y commit
+        // Listener y posición del botón "GestionPagos"
+        botonPagos.addActionListener(e -> new GestionPagos());
 
+        // Listener y posición del botón "GestionPagos"
+        btnEntrenamiento.addActionListener(e -> {
+            new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
+            vActual.setVisible(false);
+        });
+
+        // Listener y posición del botón de "Seguimiento de Progreso"
+        btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
+    }
 
     
     //Confirmacion de cierre de ventana
