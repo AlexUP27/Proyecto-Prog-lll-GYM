@@ -28,11 +28,6 @@ public class Asistencia extends JFrame {
         JScrollPane scrollPane = new JScrollPane(tablaAsistencia);
         panelPrincipal.add(scrollPane, BorderLayout.CENTER);
 
-        // Cargar los datos desde el archivo o inicializar con predeterminados
-        if (!cargarAsistencias()) {
-            inicializarDatosPredeterminados();
-        }
-
         // Botón para registrar nueva asistencia
         JButton btnRegistrar = new JButton("Registrar Asistencia");
         btnRegistrar.addActionListener(new ActionListener() {
@@ -47,7 +42,11 @@ public class Asistencia extends JFrame {
         // Añadir el panel principal al frame
         add(panelPrincipal);
 
-        setVisible(true);
+        // Inicializar la animación (ventana secundaria)
+        mostrarAnimacion();
+
+        // Inicialmente la ventana no se hace visible hasta que termine la carga
+        setVisible(false);
     }
 
     /**
@@ -128,5 +127,63 @@ public class Asistencia extends JFrame {
 
         // Guardar los datos predeterminados en el archivo
         guardarAsistencias();
+    }
+
+    /**
+     * Muestra la animación antes de cargar la ventana principal.
+     */
+    private void mostrarAnimacion() {
+        // Crear una ventana secundaria (JWindow)
+        JWindow ventanaAnimacion = new JWindow();
+        ventanaAnimacion.setSize(400, 200);
+        ventanaAnimacion.setLocationRelativeTo(null);
+
+        // Panel para mostrar la animación o mensaje
+        JPanel panelAnimacion = new JPanel();
+        panelAnimacion.setLayout(new BorderLayout());
+        JLabel lblCargando = new JLabel("Cargando datos...", JLabel.CENTER);
+        lblCargando.setFont(new Font("Arial", Font.BOLD, 20));
+        panelAnimacion.add(lblCargando, BorderLayout.CENTER);
+
+        ventanaAnimacion.add(panelAnimacion);
+        ventanaAnimacion.setVisible(true);
+
+        // Hilo para cambiar el texto de la animación antes de mostrar la ventana
+        new Thread(() -> {
+            try {
+                String[] mensajes = {
+                        "Cargando datos...",
+                        "Preparando la información...",
+                        "Cargando asistencias...",
+                        "Casi listo, un momento...",
+                        "Listo"
+                };
+
+                for (String mensaje : mensajes) {
+                    SwingUtilities.invokeLater(() -> lblCargando.setText(mensaje));
+                    Thread.sleep(1000);  // Cambia el mensaje cada 1 segundo
+                }
+
+                // Simula la carga de datos
+                Thread.sleep(2000);  // Simula un retraso en la carga de los datos cada 2 segundos
+
+                // Cargar los datos de las asistencias
+                if (!cargarAsistencias()) {
+                    SwingUtilities.invokeLater(this::inicializarDatosPredeterminados);
+                }
+
+                // Al finalizar la carga, mostrar la ventana principal
+                SwingUtilities.invokeLater(() -> {
+                    ventanaAnimacion.setVisible(false); // Ocultar la animación
+                    setVisible(true); // Hacer visible la ventana de asistencia
+                });
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // Inicialmente la ventana no se hace visible hasta que termine la carga
+        setVisible(false);
     }
 }
