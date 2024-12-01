@@ -109,23 +109,35 @@ public class GestionPagos extends JFrame {
     private void agregarPago() {
         String cantidad = txtMonto.getText();
         String metodo = (String) cmbMetodoPago.getSelectedItem();
-        
+
+        // Verificar si la cantidad está vacía
         if (cantidad.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese la cantidad que desee.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        // Verificar si la cantidad es un número válido
+        try {
+            Integer.parseInt(cantidad);  // Intentamos convertir la cantidad a un número entero
+        } catch (NumberFormatException e) {
+            // Si ocurre un error, significa que lo ingresado no es un número
+            JOptionPane.showMessageDialog(this, "La cantidad ingresada debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Agregar el pago al historial
         String detallePago = "Cantidad: " + cantidad + ", Método: " + metodo + ", Fecha: " + new Date();
         historialPagos.add(detallePago);
-        
+
         // Actualizar el historial de pagos
         actualizarHistorialPagos();
-        
+
         // Limpiar campos
         txtMonto.setText("");
         cmbMetodoPago.setSelectedIndex(0);
     }
+
+
     
     private void actualizarHistorialPagos() {
         areaHistorialPagos.setText("");
