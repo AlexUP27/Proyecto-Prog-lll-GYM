@@ -60,8 +60,8 @@ public class MenuPrincipalMonitor extends JFrame {
         btnAsistencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Aquí puedes abrir la ventana o funcionalidad de Asistencia
-                JOptionPane.showMessageDialog(null, "Abrir Asistencia");
+                // Abrir la ventana de Asistencia
+                new Asistencia();
             }
         });
 
@@ -88,8 +88,11 @@ public class MenuPrincipalMonitor extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrir la ventana de Horarios al hacer clic
-                HorariosVentana ventanaHorarios = new HorariosVentana();
-                ventanaHorarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Solo cierra la ventana de horarios
+            	ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
+            	HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
+            	ventanaHorarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            	ventanaHorarios.setVisible(true);
+
             }
         });
 

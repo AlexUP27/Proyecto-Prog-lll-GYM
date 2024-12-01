@@ -320,7 +320,12 @@ public class VentanaInicial extends JFrame {
         botonHorario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HorarioClases insertar = new HorarioClases();
+            	ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
+            	HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
+            	// Hacer visible la ventana
+                ventanaHorarios.setVisible(true);
+                // Opcional: Puedes hacer invisible la ventana principal si lo deseas
+                vActual.setVisible(false);
             }
         });
         
