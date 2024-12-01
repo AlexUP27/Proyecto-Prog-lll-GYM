@@ -2,8 +2,6 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class InicioSesionMonitor extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -39,7 +37,7 @@ public class InicioSesionMonitor extends JFrame {
         panelFormulario.setLayout(new GridLayout(4, 2, 10, 10));
         panelFormulario.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panelFormulario.setBackground(new Color(245, 245, 245));
-        
+
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
@@ -62,7 +60,7 @@ public class InicioSesionMonitor extends JFrame {
         lblError = new JLabel();
         lblError.setForeground(Color.RED);
         lblError.setFont(new Font("Arial", Font.ITALIC, 12));
-        
+
         btnAtras = new JButton("Atras");
         btnAtras.setFont(new Font("Arial", Font.PLAIN, 16));
         btnAtras.setBackground(new Color(85, 107, 47));
@@ -74,7 +72,7 @@ public class InicioSesionMonitor extends JFrame {
         panelFormulario.add(txtNombreUsuario);
         panelFormulario.add(lblContrasenia);
         panelFormulario.add(txtContraseniaUsuario);
-        panelFormulario.add(new JLabel());  // Fila vacía para el espaciado
+        panelFormulario.add(new JLabel()); // Fila vacía para el espaciado
         panelFormulario.add(lblError);
         panelBotones.add(btnLogin);
         panelBotones.add(btnAtras);
@@ -83,31 +81,27 @@ public class InicioSesionMonitor extends JFrame {
         panel.add(panelFormulario, BorderLayout.CENTER);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
-        // Acción del botón de login
-        btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String usuario = txtNombreUsuario.getText();
-                String contrasena = new String(txtContraseniaUsuario.getPassword());
+        // Acción del botón de login usando lambda
+        btnLogin.addActionListener(e -> {
+            String usuario = txtNombreUsuario.getText();
+            String contrasena = new String(txtContraseniaUsuario.getPassword());
 
-                if (!usuario.isEmpty() && !contrasena.isEmpty()) {
-                    // Verificación simple (puedes hacerla más compleja con bases de datos, etc.)
-                    if (usuario.equals("monitor") && contrasena.equals("password")) {
-                        // Si el login es correcto, abre el menú principal
-                        new MenuPrincipalMonitor();
-                        dispose(); // Cierra la ventana de inicio de sesión
-                    } else {
-                        lblError.setText("Usuario o contraseña incorrectos.");
-                    }
+            if (!usuario.isEmpty() && !contrasena.isEmpty()) {
+                // Verificación simple (puedes hacerla más compleja con bases de datos, etc.)
+                if (usuario.equals("monitor") && contrasena.equals("password")) {
+                    // Si el login es correcto, abre el menú principal
+                    new MenuPrincipalMonitor();
+                    dispose(); // Cierra la ventana de inicio de sesión
                 } else {
-                    lblError.setText("Por favor, complete todos los campos.");
+                    lblError.setText("Usuario o contraseña incorrectos.");
                 }
+            } else {
+                lblError.setText("Por favor, complete todos los campos.");
             }
         });
-        
-        btnAtras.addActionListener(e -> {
-        	dispose();
-        });
+
+        // Acción del botón Atras usando lambda
+        btnAtras.addActionListener(e -> dispose());
 
         // Hacer visible la ventana
         add(panel);
