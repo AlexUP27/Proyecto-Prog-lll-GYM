@@ -29,7 +29,7 @@ public class HorarioClases extends JFrame {
         JButton btnInsertar = new JButton("Insertar");
         JButton btnEliminar = new JButton("Eliminar");
 
-        // Usando lambdas en lugar de ActionListener anónimo
+        // Modificar clase seleccionada
         btnModificar.addActionListener(e -> {
             int fila = tabla.getSelectedRow();
             int columna = tabla.getSelectedColumn();
@@ -48,19 +48,29 @@ public class HorarioClases extends JFrame {
             }
         });
 
+        // Insertar nueva clase
         btnInsertar.addActionListener(e -> {
-            String nuevaHora = JOptionPane.showInputDialog("Nueva hora (ej. 22:00 - 23:00):");
-            if (nuevaHora != null && !nuevaHora.trim().isEmpty()) {
+            String nuevaHora = JOptionPane.showInputDialog("Ingrese la hora (solo números, ej. 22):");
+
+            try {
+                // Intenta convertir la entrada a un número entero
+                int hora = Integer.parseInt(nuevaHora);
+
+                // Si es válido, construimos la nueva fila
                 String[] nuevaFila = new String[6];
-                nuevaFila[0] = nuevaHora;
+                nuevaFila[0] = String.valueOf(hora);
                 for (int i = 1; i < nuevaFila.length; i++) {
                     nuevaFila[i] = JOptionPane.showInputDialog("Clase para " + columnas[i] + ":");
                 }
                 modeloHorario.insertarClase(-1, nuevaFila);
                 actualizarTabla();
+            } catch (NumberFormatException ex) {
+                // Si la entrada no es válida, mostramos un mensaje de error
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para la hora.");
             }
         });
 
+        // Eliminar clase seleccionada
         btnEliminar.addActionListener(e -> {
             int fila = tabla.getSelectedRow();
             int columna = tabla.getSelectedColumn();
