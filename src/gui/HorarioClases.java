@@ -50,23 +50,42 @@ public class HorarioClases extends JFrame {
 
         // Insertar nueva clase
         btnInsertar.addActionListener(e -> {
-            String nuevaHora = JOptionPane.showInputDialog("Ingrese la hora (solo números, ej. 22):");
+            String nuevaHora = JOptionPane.showInputDialog("Ingrese el horario (ej. 10:00 - 11:00):");
 
             try {
-                // Intenta convertir la entrada a un número entero
-                int hora = Integer.parseInt(nuevaHora);
+                // Verificar que el formato de la hora sea válido
+                if (nuevaHora != null && nuevaHora.matches("\\d{2}:\\d{2} - \\d{2}:\\d{2}")) {
+                    // Extraemos las horas y minutos para validaciones adicionales si es necesario
+                    String[] partes = nuevaHora.split(" - ");
+                    String horaInicio = partes[0];
+                    String horaFin = partes[1];
 
-                // Si es válido, construimos la nueva fila
-                String[] nuevaFila = new String[6];
-                nuevaFila[0] = String.valueOf(hora);
-                for (int i = 1; i < nuevaFila.length; i++) {
-                    nuevaFila[i] = JOptionPane.showInputDialog("Clase para " + columnas[i] + ":");
+                    String[] inicioPartes = horaInicio.split(":");
+                    String[] finPartes = horaFin.split(":");
+
+                    int hora1 = Integer.parseInt(inicioPartes[0]);
+                    int min1 = Integer.parseInt(inicioPartes[1]);
+                    int hora2 = Integer.parseInt(finPartes[0]);
+                    int min2 = Integer.parseInt(finPartes[1]);
+
+                    // Validaciones adicionales: hora de inicio debe ser menor a la de fin
+                    if (hora1 > hora2 || (hora1 == hora2 && min1 >= min2)) {
+                        throw new IllegalArgumentException("La hora de inicio debe ser menor a la hora de fin.");
+                    }
+
+                    // Si es válido, construimos la nueva fila
+                    String[] nuevaFila = new String[6];
+                    nuevaFila[0] = nuevaHora;
+                    for (int i = 1; i < nuevaFila.length; i++) {
+                        nuevaFila[i] = JOptionPane.showInputDialog("Clase para " + columnas[i] + ":");
+                    }
+                    modeloHorario.insertarClase(-1, nuevaFila);
+                    actualizarTabla();
+                } else {
+                    throw new IllegalArgumentException("Formato de horario inválido. Use el formato HH:MM - HH:MM.");
                 }
-                modeloHorario.insertarClase(-1, nuevaFila);
-                actualizarTabla();
-            } catch (NumberFormatException ex) {
-                // Si la entrada no es válida, mostramos un mensaje de error
-                JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido para la hora.");
+            } catch (NumberFormatException | IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
             }
         });
 
