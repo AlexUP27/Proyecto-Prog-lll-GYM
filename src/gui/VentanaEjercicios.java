@@ -2,17 +2,12 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
 
 public class VentanaEjercicios extends JFrame {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Map<String, String> ejerciciosDetalles;
+    private static final long serialVersionUID = 1L;
+    private Map<String, String> ejerciciosDetalles;
     private Map<String, String> ejerciciosImagenes;
     private Map<String, String> ejerciciosBreves;
     private JLabel lblImagenEjercicio;
@@ -79,22 +74,19 @@ public class VentanaEjercicios extends JFrame {
             }
         });
 
-        // Acción del botón "Ver Detalles"
-        btnVerDetalles.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String ejercicioSeleccionado = listaEjercicios.getSelectedValue();
-                if (ejercicioSeleccionado != null) {
-                    String detalle = ejerciciosDetalles.get(ejercicioSeleccionado);
-                    new VentanaDetalleEjercicio(ejercicioSeleccionado, detalle);
-                } else {
-                    JOptionPane.showMessageDialog(
-                        VentanaEjercicios.this,
-                        "Por favor, selecciona un ejercicio.",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                    );
-                }
+        // Acción del botón "Ver Detalles" usando lambda
+        btnVerDetalles.addActionListener(e -> {
+            String ejercicioSeleccionado = listaEjercicios.getSelectedValue();
+            if (ejercicioSeleccionado != null) {
+                String detalle = ejerciciosDetalles.get(ejercicioSeleccionado);
+                new VentanaDetalleEjercicio(ejercicioSeleccionado, detalle);
+            } else {
+                JOptionPane.showMessageDialog(
+                    VentanaEjercicios.this,
+                    "Por favor, selecciona un ejercicio.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
             }
         });
 
@@ -116,4 +108,3 @@ public class VentanaEjercicios extends JFrame {
         lblDescripcionCorta.setText(descripcionCorta != null ? descripcionCorta : "");
     }
 }
-
