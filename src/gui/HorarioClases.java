@@ -55,10 +55,13 @@ public class HorarioClases extends JFrame {
             try {
                 // Verificar que el formato de la hora sea válido
                 if (nuevaHora != null && nuevaHora.matches("\\d{2}:\\d{2} - \\d{2}:\\d{2}")) {
-                    // Extraemos las horas y minutos para validaciones adicionales si es necesario
+                    // Extraemos las horas y minutos para validaciones adicionales
                     String[] partes = nuevaHora.split(" - ");
                     String horaInicio = partes[0];
                     String horaFin = partes[1];
+
+                    validarHora(horaInicio);
+                    validarHora(horaFin);
 
                     String[] inicioPartes = horaInicio.split(":");
                     String[] finPartes = horaFin.split(":");
@@ -84,7 +87,7 @@ public class HorarioClases extends JFrame {
                 } else {
                     throw new IllegalArgumentException("Formato de horario inválido. Use el formato HH:MM - HH:MM.");
                 }
-            } catch (NumberFormatException | IllegalArgumentException ex) {
+            } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
             }
         });
@@ -110,6 +113,16 @@ public class HorarioClases extends JFrame {
         getContentPane().add(panelBotones, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    private void validarHora(String hora) {
+        String[] partes = hora.split(":");
+        int h = Integer.parseInt(partes[0]);
+        int m = Integer.parseInt(partes[1]);
+
+        if (h < 0 || h > 23 || m < 0 || m > 59) {
+            throw new IllegalArgumentException("Hora inválida. Use el formato HH:MM con valores válidos.");
+        }
     }
 
     private void actualizarTabla() {
