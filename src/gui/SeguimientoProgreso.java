@@ -136,7 +136,7 @@ public class SeguimientoProgreso extends JFrame {
     }
 
     private void guardarDatos() {
-        try (BufferedWriter escritor = new BufferedWriter(new FileWriter("progreso.txt"))) {
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ARCHIVO_DATOS))) {
             for (int i = 0; i < modeloTabla.getRowCount(); i++) {
                 String linea = modeloTabla.getValueAt(i, 0) + "," +
                         modeloTabla.getValueAt(i, 1) + "," +
@@ -151,12 +151,12 @@ public class SeguimientoProgreso extends JFrame {
     }
 
     private void cargarDatos() {
-        File archivo = new File("progreso.txt");
+        File archivo = new File(ARCHIVO_DATOS);
         if (!archivo.exists()) {
             return; // Si no hay archivo, no hay nada que cargar
         }
 
-        try (BufferedReader lector = new BufferedReader(new FileReader("progreso.txt"))) {
+        try (BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO_DATOS))) {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 String[] datos = linea.split(",");

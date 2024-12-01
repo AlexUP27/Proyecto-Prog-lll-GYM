@@ -13,7 +13,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Declaración de los componentes botón
-    private JButton btnInicioSesion, btnCierreSesion, botonMonitor, btnRegistro;
+    private JButton btnInicioSesion, botonMonitor, btnRegistro;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
     // Declaración de los componente cuadro de texto
@@ -126,7 +126,7 @@ public class VentanaInicial extends JFrame {
         botonMonitor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InicioSesionMonitor insertar = new InicioSesionMonitor();
+                new InicioSesionMonitor();
             }
         });
 
@@ -155,7 +155,7 @@ public class VentanaInicial extends JFrame {
         btnRegistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaRegistro ventanaRegistro = new VentanaRegistro();
+                new VentanaRegistro();
             }
         });
 
@@ -312,7 +312,7 @@ public class VentanaInicial extends JFrame {
         botonClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ClientesBd insertar = new ClientesBd();
+                new ClientesBd();
             }
         });
 
@@ -333,7 +333,7 @@ public class VentanaInicial extends JFrame {
         botonPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestionPagos gestionPagos = new GestionPagos();
+                new GestionPagos();
             }
         });
         
@@ -350,7 +350,7 @@ public class VentanaInicial extends JFrame {
         btnSeguimientoProgreso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	SeguimientoProgreso seguimientoProgreso = new SeguimientoProgreso();
+            	new SeguimientoProgreso();
             }
         });
     }
