@@ -357,6 +357,7 @@ public class VentanaInicial extends JFrame {
                 new ClientesBd();
             }
         });
+        //
 
         // Listener y posición del botón "Horario Clases"
         botonHorario.addActionListener(new ActionListener() {
