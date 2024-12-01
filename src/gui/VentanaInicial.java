@@ -5,6 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
 public class VentanaInicial extends JFrame {
@@ -13,7 +19,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Declaración de los componentes botón
-    private JButton btnInicioSesion, botonMonitor, btnRegistro;
+    private JButton btnInicioSesion, btnCierreSesion, botonMonitor, btnRegistro;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
     // Declaración de los componente cuadro de texto
@@ -126,7 +132,7 @@ public class VentanaInicial extends JFrame {
         botonMonitor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new InicioSesionMonitor();
+                InicioSesionMonitor insertar = new InicioSesionMonitor();
             }
         });
 
@@ -143,10 +149,19 @@ public class VentanaInicial extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String user = txtNombreUsuario.getText();
                 String contrasena = new String(txtContraseniaUsuario.getPassword());
+
+                //Verificar si los campos están vacios
                 if (user.isEmpty() || contrasena.isEmpty()) {
                     JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
-                } else {
+                    return;
+                }
+
+                //Verificar si los datos coinciden con los de la base de datos
+                if (usuarioValido(user, contrasena)) {
                     panelDeBienvenida(user);
+                } else {
+                    // Mostrar error en caso de que no coincidan
+                    JOptionPane.showMessageDialog(vActual, "Error al iniciar sesión. Compruebe si los datos están bien escritos. Si no está registrado, pulse el botón de registro para hacerlo.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -155,14 +170,41 @@ public class VentanaInicial extends JFrame {
         btnRegistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VentanaRegistro();
+                VentanaRegistro ventanaRegistro = new VentanaRegistro();
             }
         });
 
         setVisible(true);
     }
 	
-	
+	//segundo intento de push
+    
+    private boolean usuarioValido(String username, String password) {
+        // Consulta SQL para filtrar la tabla segun el nombre de usuario y la contraseña
+        String query = "SELECT * FROM ContraseñasInicioSesion WHERE Nom_usuario = ? AND contraseña = ?";
+        
+        // Establecer la conexión a la base de datos SQLite
+        try (Connection con = DriverManager.getConnection("jdbc:sqlite:Gym.db");
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            
+            // Establece los parametros de la consulta
+            stmt.setString(1, username); // Asigna el nombre de usuario
+            stmt.setString(2, password); // Asigna la contraseña
+
+            // Ejecuta la consulta
+            ResultSet rs = stmt.executeQuery();
+            
+            // Si el resultado tiene alguna fila, el usuario es valido
+            return rs.next(); 
+            
+        } catch (SQLException e) {
+            e.printStackTrace(); // Imprime cualquier error de SQL
+        }
+        
+        // Si no se encuentra un usuario valido, devolver false
+        return false;
+    }
+    
     private void panelDeBienvenida(String username) {
         // Creamos un nuevo frame para la bienvenida
         JFrame frameDeBienvenida = new JFrame("Bienvenido");
@@ -312,7 +354,7 @@ public class VentanaInicial extends JFrame {
         botonClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ClientesBd();
+                ClientesBd insertar = new ClientesBd();
             }
         });
 
@@ -320,12 +362,7 @@ public class VentanaInicial extends JFrame {
         botonHorario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
-            	HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
-            	// Hacer visible la ventana
-                ventanaHorarios.setVisible(true);
-                // Opcional: Puedes hacer invisible la ventana principal si lo deseas
-                vActual.setVisible(false);
+                HorarioClases insertar = new HorarioClases();
             }
         });
         
@@ -333,7 +370,7 @@ public class VentanaInicial extends JFrame {
         botonPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GestionPagos();
+                GestionPagos gestionPagos = new GestionPagos();
             }
         });
         
@@ -350,7 +387,7 @@ public class VentanaInicial extends JFrame {
         btnSeguimientoProgreso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	new SeguimientoProgreso();
+            	SeguimientoProgreso seguimientoProgreso = new SeguimientoProgreso();
             }
         });
     }
