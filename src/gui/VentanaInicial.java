@@ -33,12 +33,7 @@ public class VentanaInicial extends JFrame {
         vActual = this;
 
         // Añadimos un listener para que salte la confirmación de cierre de ventana
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                confirmWindowClosing();
-            }
-        });
+        addWindowListener((WindowEvent e) -> confirmWindowClosing());
 
         // Establecemos las propiedades de la ventana
         setBounds(300, 200, 600, 400);
