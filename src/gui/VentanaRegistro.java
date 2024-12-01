@@ -8,8 +8,9 @@ import java.awt.event.ActionListener;
 public class VentanaRegistro extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    // Declaración de componentes
-    private JTextField txtNombre, txtApellido, txtEdad, txtCalle, txtEmail;
+
+    // Declaración de los componentes
+    private JTextField txtEmail;
     private JPasswordField txtContrasenia;
     private JButton btnRegistrar, btnCancelar;
     private JFrame vActual;
@@ -21,102 +22,46 @@ public class VentanaRegistro extends JFrame {
 
         // Configuración de la ventana
         setTitle("Registro de Usuario");
-        setBounds(300, 200, 700, 500); // Tamaño ampliado
+        setBounds(300, 200, 600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Panel principal con un diseño GridBagLayout
-        JPanel panelPrincipal = new JPanel(new GridBagLayout());
-        panelPrincipal.setBackground(Color.WHITE);
+        // Panel Principal
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(15, 15, 15, 15); // Espaciado
+        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado
 
-        // Estilo de las etiquetas y campos de texto
+        // Fuente y color personalizados
         Font etiquetaFont = new Font(Font.SANS_SERIF, Font.PLAIN, 18);
         Font campoFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 
-        // Etiqueta y campo para el nombre
-        JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setFont(etiquetaFont);
+        // Estilo de las etiquetas
+        JLabel lblEmail = new JLabel("Email (Usuario):");
+        lblEmail.setFont(etiquetaFont);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
-        panelPrincipal.add(lblNombre, gbc);
-
-        txtNombre = new JTextField(20);
-        txtNombre.setFont(campoFont);
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Expandir horizontalmente
-        panelPrincipal.add(txtNombre, gbc);
-
-        // Etiqueta y campo para el apellido
-        JLabel lblApellido = new JLabel("Apellido:");
-        lblApellido.setFont(etiquetaFont);
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE;
-        panelPrincipal.add(lblApellido, gbc);
-
-        txtApellido = new JTextField(20);
-        txtApellido.setFont(campoFont);
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelPrincipal.add(txtApellido, gbc);
-
-        // Etiqueta y campo para la edad
-        JLabel lblEdad = new JLabel("Edad:");
-        lblEdad.setFont(etiquetaFont);
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE;
-        panelPrincipal.add(lblEdad, gbc);
-
-        txtEdad = new JTextField(20);
-        txtEdad.setFont(campoFont);
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelPrincipal.add(txtEdad, gbc);
-
-        // Etiqueta y campo para la calle
-        JLabel lblCalle = new JLabel("Calle:");
-        lblCalle.setFont(etiquetaFont);
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE;
-        panelPrincipal.add(lblCalle, gbc);
-
-        txtCalle = new JTextField(20);
-        txtCalle.setFont(campoFont);
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelPrincipal.add(txtCalle, gbc);
-
-        // Etiqueta y campo para el email
-        JLabel lblEmail = new JLabel("Email:");
-        lblEmail.setFont(etiquetaFont);
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE;
         panelPrincipal.add(lblEmail, gbc);
 
         txtEmail = new JTextField(20);
         txtEmail.setFont(campoFont);
         gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Expande horizontalmente
         panelPrincipal.add(txtEmail, gbc);
 
-        // Etiqueta y campo para la contraseña
+        // Estilo de las contraseñas
         JLabel lblContrasenia = new JLabel("Contraseña:");
         lblContrasenia.setFont(etiquetaFont);
         gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
         panelPrincipal.add(lblContrasenia, gbc);
 
         txtContrasenia = new JPasswordField(20);
         txtContrasenia.setFont(campoFont);
         gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Expande horizontalmente
         panelPrincipal.add(txtContrasenia, gbc);
 
         // Panel para los botones
@@ -141,7 +86,6 @@ public class VentanaRegistro extends JFrame {
 
         // Listener para el botón de "Cancelar"
         btnCancelar.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 vActual.dispose(); // Cerrar la ventana actual
             }
@@ -149,22 +93,24 @@ public class VentanaRegistro extends JFrame {
 
         // Listener para el botón de "Registrarse"
         btnRegistrar.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String edad = txtEdad.getText();
-                String calle = txtCalle.getText();
-                String email = txtEmail.getText();
+                String usuario = txtEmail.getText();
                 String contrasena = new String(txtContrasenia.getPassword());
 
-                // Verificar que todos los campos estén completos
-                if (nombre.isEmpty() || apellido.isEmpty() || edad.isEmpty() ||
-                        calle.isEmpty() || email.isEmpty() || contrasena.isEmpty()) {
-                    JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+                // Verificar que el nombre de usuario y la contraseña no estén vacíos
+                if (usuario.isEmpty() || contrasena.isEmpty()) {
+                    JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Verificar si el usuario ya existe en la base de datos
+                if (BDInicioSesion.existeUsuario(usuario)) {
+                    JOptionPane.showMessageDialog(vActual, "El usuario ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(vActual, "Registro completado con éxito.", "Registro", JOptionPane.INFORMATION_MESSAGE);
-                    vActual.dispose(); // Cierra la ventana de registro
+                    // Si no existe, agregar el nuevo usuario a la base de datos
+                    BDInicioSesion.insertarUsuario(usuario, contrasena);
+                    JOptionPane.showMessageDialog(vActual, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    vActual.dispose(); // Cerrar la ventana después de registrar
                 }
             }
         });
