@@ -95,12 +95,7 @@ public class GestionPagos extends JFrame {
     	add(panelPrincipal);
 
     	// Acción del botón "Agregar Pago"
-    	btnAgregarPago.addActionListener(new ActionListener() {
-    		@Override
-    	    public void actionPerformed(ActionEvent e) {
-    			agregarPago();
-    	    }
-    	});
+    	btnAgregarPago.addActionListener(e -> agregarPago());
 
     	setVisible(true);
     }
