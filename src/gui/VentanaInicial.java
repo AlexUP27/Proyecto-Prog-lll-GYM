@@ -19,7 +19,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Declaración de los componentes botón
-    private JButton btnInicioSesion, btnCierreSesion, botonMonitor, btnRegistro;
+    private JButton btnInicioSesion, botonMonitor, btnRegistro;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
     // Declaración de los componente cuadro de texto
@@ -132,7 +132,7 @@ public class VentanaInicial extends JFrame {
         botonMonitor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InicioSesionMonitor insertar = new InicioSesionMonitor();
+                new InicioSesionMonitor();
             }
         });
 
@@ -143,7 +143,7 @@ public class VentanaInicial extends JFrame {
         getContentPane().add(pNorte, BorderLayout.NORTH);
         getContentPane().add(pCentro, BorderLayout.CENTER);
 
-        // Añadimos los listeners
+     // Añadimos los listeners
         btnInicioSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -165,20 +165,19 @@ public class VentanaInicial extends JFrame {
                 }
             }
         });
+
         
      // Listener para el botón de "Registrarse"
         btnRegistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                VentanaRegistro ventanaRegistro = new VentanaRegistro();
+                new VentanaRegistro();
             }
         });
 
         setVisible(true);
     }
 	
-	//segundo intento de push
-    
     private boolean usuarioValido(String username, String password) {
         // Consulta SQL para filtrar la tabla segun el nombre de usuario y la contraseña
         String query = "SELECT * FROM ContraseñasInicioSesion WHERE Nom_usuario = ? AND contraseña = ?";
@@ -204,6 +203,7 @@ public class VentanaInicial extends JFrame {
         // Si no se encuentra un usuario valido, devolver false
         return false;
     }
+
     
     private void panelDeBienvenida(String username) {
         // Creamos un nuevo frame para la bienvenida
@@ -354,7 +354,7 @@ public class VentanaInicial extends JFrame {
         botonClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ClientesBd insertar = new ClientesBd();
+                new ClientesBd();
             }
         });
 
@@ -362,7 +362,12 @@ public class VentanaInicial extends JFrame {
         botonHorario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HorarioClases insertar = new HorarioClases();
+            	ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
+            	HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
+            	// Hacer visible la ventana
+                ventanaHorarios.setVisible(true);
+                // Opcional: Puedes hacer invisible la ventana principal si lo deseas
+                vActual.setVisible(false);
             }
         });
         
@@ -370,7 +375,7 @@ public class VentanaInicial extends JFrame {
         botonPagos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestionPagos gestionPagos = new GestionPagos();
+                new GestionPagos();
             }
         });
         
@@ -387,7 +392,7 @@ public class VentanaInicial extends JFrame {
         btnSeguimientoProgreso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	SeguimientoProgreso seguimientoProgreso = new SeguimientoProgreso();
+            	new SeguimientoProgreso();
             }
         });
     }
