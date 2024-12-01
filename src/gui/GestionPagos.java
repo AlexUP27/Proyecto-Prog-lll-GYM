@@ -15,7 +15,7 @@ public class GestionPagos extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtMonto;
+	private JTextField txtCantidad;
     private JComboBox<String> cmbMetodoPago;
     private JTextArea areaHistorialPagos;
     private ArrayList<String> historialPagos;
@@ -49,10 +49,10 @@ public class GestionPagos extends JFrame {
     	gbc.gridy = 0;
     	panelIngresoPago.add(new JLabel("Cantidad:"), gbc);
 
-    	txtMonto = new JTextField();
+    	txtCantidad = new JTextField();
     	gbc.gridx = 1;
     	gbc.gridy = 0;
-    	panelIngresoPago.add(txtMonto, gbc);
+    	panelIngresoPago.add(txtCantidad, gbc);
 
     	// Método de pago con etiqueta
     	gbc.gridx = 0;
@@ -84,7 +84,6 @@ public class GestionPagos extends JFrame {
     	areaHistorialPagos.setEditable(false);
     	areaHistorialPagos.setFont(new Font("Monospaced", Font.PLAIN, 12));
     	areaHistorialPagos.setBackground(new Color(245, 245, 245));
-    	//areaHistorialPagos.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1, true),BorderFactory.createEmptyBorder(5, 5, 5, 5)));
     	JScrollPane scrollHistorial = new JScrollPane(areaHistorialPagos);
         scrollHistorial.setBorder(BorderFactory.createTitledBorder("Historial de Pagos"));
     	
@@ -107,7 +106,7 @@ public class GestionPagos extends JFrame {
     }
     
     private void agregarPago() {
-        String cantidad = txtMonto.getText();
+        String cantidad = txtCantidad.getText();
         String metodo = (String) cmbMetodoPago.getSelectedItem();
 
         // Verificar si la cantidad está vacía
@@ -133,7 +132,7 @@ public class GestionPagos extends JFrame {
         actualizarHistorialPagos();
 
         // Limpiar campos
-        txtMonto.setText("");
+        txtCantidad.setText("");
         cmbMetodoPago.setSelectedIndex(0);
     }
 

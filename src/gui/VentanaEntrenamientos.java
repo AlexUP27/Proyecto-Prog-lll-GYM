@@ -88,7 +88,7 @@ public class VentanaEntrenamientos extends JFrame {
 	    detalles.put("Press de Banca", "1. Acuéstate en un banco con los pies firmemente apoyados en el suelo. \n2. Sostén la barra con las manos separadas un poco más del ancho de los hombros. \n3. Baja la barra lentamente hacia el pecho mientras mantienes los codos hacia afuera. \n4. Empuja la barra hacia arriba, extendiendo completamente los brazos. \n5. Mantén el control durante todo el movimiento");
 	    detalles.put("Peso Muerto", "1. Coloca los pies debajo de la barra, separados al ancho de los hombros. \n2. Agarra la barra con ambas manos (agarre alterno o pronado). \n3. Mantén la espalda recta y el pecho levantado. \n4. Levanta la barra extendiendo las piernas y las caderas al mismo tiempo. \n5. Baja la barra controladamente manteniendo una buena postura");
 	    detalles.put("Dominadas", "1. Agarra la barra con las manos separadas al ancho de los hombros. \n2. Mantén el cuerpo recto y los pies juntos. \n3. Tira del cuerpo hacia arriba hasta que la barbilla pase por encima de la barra. \n4. Baja lentamente a la posición inicial. \n5. Evita balancear el cuerpo para mantener la forma");
-	    detalles.put("Remo con Barra", "1. Coloca los pies separados al ancho de los hombros. \n2. Agarra la barra con un agarre pronado o supinado, con las manos ligeramente más anchas que los hombros. \n3. Inclina el torso hacia adelante manteniendo la espalda recta. \n4. Lleva la barra hacia el abdomen contrayendo los músculos de la espalda. \n5. Baja la barra controladamente a la posición inicial");
+	    detalles.put("Remo con Mancuernas", "1. Coloca los pies separados al ancho de los hombros. \n2. Agarra la barra con un agarre pronado o supinado, con las manos ligeramente más anchas que los hombros. \n3. Inclina el torso hacia adelante manteniendo la espalda recta. \n4. Lleva la barra hacia el abdomen contrayendo los músculos de la espalda. \n5. Baja la barra controladamente a la posición inicial");
 	    return detalles;
 	}
 
@@ -108,8 +108,8 @@ public class VentanaEntrenamientos extends JFrame {
         imagenes.put("Press de Banca", "img/press_banca.jpg");
         imagenes.put("Sentadillas con Peso", "img/sentadillas.jpeg");
         imagenes.put("Peso Muerto", "img/peso_muerto.jpeg");
-        imagenes.put("Dominadas", "img/peso_muerto.jpeg"); //Cambiar foto
-        imagenes.put("Remo con Mancuernas", "img/peso_muerto.jpeg"); //Cambiar foto
+        imagenes.put("Dominadas", "img/dominadas.jpg");
+        imagenes.put("Remo con Mancuernas", "img/remomancuerna.jpeg");
         return imagenes;
     }
 
@@ -137,11 +137,11 @@ public class VentanaEntrenamientos extends JFrame {
 
     private Map<String, String> crearImagenesFlexibilidad() {
         Map<String, String> imagenes = new HashMap<>();
-        imagenes.put("Estiramiento de Piernas", "img/yoga.jpeg"); //Cambiar foto
-        imagenes.put("Estiramiento de Hombros", "img/estiramiento.jpeg"); //Cambiar foto
-        imagenes.put("Estiramiento del Gato", "img/puente.jpeg"); //Cambiar foto
-        imagenes.put("Estiramiento de Cuádriceps", "img/puente.jpeg"); //Cambiar foto
-        imagenes.put("Estiramiento de Espalda Baja", "img/puente.jpeg"); //Cambiar foto
+        imagenes.put("Estiramiento de Piernas", "img/estiramientopiernas.jpeg");
+        imagenes.put("Estiramiento de Hombros", "img/estiramientohombros.jpeg");
+        imagenes.put("Estiramiento del Gato", "img/estiramientogato.jpeg");
+        imagenes.put("Estiramiento de Cuádriceps", "img/estiramientocuadriceps.jpeg");
+        imagenes.put("Estiramiento de Espalda Baja", "img/estiramientoespaldabaja.jpeg");
         return imagenes;
     }
     
