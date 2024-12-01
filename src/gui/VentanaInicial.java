@@ -14,11 +14,9 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 public class VentanaInicial extends JFrame {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	// Declaración de los componentes botón
+ 
+    private static final long serialVersionUID = 1L;
+    // Declaración de los componentes botón
     private JButton btnInicioSesion, botonMonitor, btnRegistro;
     // Declaración de los componentes etiqueta
     private JLabel lblTitulo, lblNombreUsuario, lblContraseniaUsuario;
@@ -32,7 +30,6 @@ public class VentanaInicial extends JFrame {
 
     public VentanaInicial() {
         super();
-
         vActual = this;
 
         // Añadimos un listener para que salte la confirmación de cierre de ventana
@@ -162,9 +159,7 @@ public class VentanaInicial extends JFrame {
                 JOptionPane.showMessageDialog(vActual, "Error al iniciar sesión. Compruebe si los datos están bien escritos. Si no está registrado, pulse el botón de registro para hacerlo.", "Error de Inicio de Sesión", JOptionPane.ERROR_MESSAGE);
             }
         });
-
-
-        
+	    
      // Listener para el botón de "Registrarse"
         btnRegistro.addActionListener(e -> new VentanaRegistro());
         
@@ -192,7 +187,6 @@ public class VentanaInicial extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace(); // Imprime cualquier error de SQL
         }
-        
         // Si no se encuentra un usuario valido, devolver false
         return false;
     }
@@ -239,7 +233,6 @@ public class VentanaInicial extends JFrame {
         // Hacer invisible la ventana del main
         vActual.setVisible(false);
     }
-
 	
     // Método para abrir una nueva ventana después de la bienvenida
     private void openNewWindow() {
@@ -331,14 +324,13 @@ public class VentanaInicial extends JFrame {
         // Establecer el panel principal como el contenido de la ventana
         nuevaVentana.add(panelPrincipal);
         nuevaVentana.setVisible(true);
-
+	    
         // Listener para el botón de "Cerrar Sesión"
         btnCerrarSesion.addActionListener(e -> {
             nuevaVentana.dispose();  // Cerrar la nueva ventana
             vActual.setVisible(true); // Mostrar de nuevo la ventana de inicio de sesión
         });
-
-
+	    
         // Listener y posición del botón "Información Clientes"
         botonClientes.addActionListener(e -> new ClientesBd());
         
@@ -353,7 +345,7 @@ public class VentanaInicial extends JFrame {
         // Listener y posición del botón "GestionPagos"
         botonPagos.addActionListener(e -> new GestionPagos());
 
-        // Listener y posición del botón "GestionPagos"
+        // Listener y posición del botón "Entrenamientos"
         btnEntrenamiento.addActionListener(e -> {
             new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
             vActual.setVisible(false);
@@ -363,7 +355,6 @@ public class VentanaInicial extends JFrame {
         btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
     }
 
-    
     //Confirmacion de cierre de ventana
   	private void confirmWindowClosing() {
   		int result = JOptionPane.showConfirmDialog(VentanaInicial.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
