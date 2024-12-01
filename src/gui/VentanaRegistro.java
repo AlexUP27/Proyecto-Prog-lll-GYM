@@ -85,35 +85,30 @@ public class VentanaRegistro extends JFrame {
         panelBotones.add(btnCancelar);
 
         // Listener para el botón de "Cancelar"
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                vActual.dispose(); // Cerrar la ventana actual
-            }
-        });
+        btnCancelar.addActionListener(e -> vActual.dispose()); 
 
         // Listener para el botón de "Registrarse"
-        btnRegistrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String usuario = txtEmail.getText();
-                String contrasena = new String(txtContrasenia.getPassword());
-
-                // Verificar que el nombre de usuario y la contraseña no estén vacíos
-                if (usuario.isEmpty() || contrasena.isEmpty()) {
-                    JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                // Verificar si el usuario ya existe en la base de datos
-                if (BDInicioSesion.existeUsuario(usuario)) {
-                    JOptionPane.showMessageDialog(vActual, "El usuario ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Si no existe, agregar el nuevo usuario a la base de datos
-                    BDInicioSesion.insertarUsuario(usuario, contrasena);
-                    JOptionPane.showMessageDialog(vActual, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    vActual.dispose(); // Cerrar la ventana después de registrar
-                }
+        btnRegistrar.addActionListener(e -> {
+            String usuario = txtEmail.getText();
+            String contrasena = new String(txtContrasenia.getPassword());
+        
+            // Verificar que el nombre de usuario y la contraseña no estén vacíos
+            if (usuario.isEmpty() || contrasena.isEmpty()) {
+                JOptionPane.showMessageDialog(vActual, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            // Verificar si el usuario ya existe en la base de datos
+            if (BDInicioSesion.existeUsuario(usuario)) {
+                JOptionPane.showMessageDialog(vActual, "El usuario ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Si no existe, agregar el nuevo usuario a la base de datos
+                BDInicioSesion.insertarUsuario(usuario, contrasena);
+                JOptionPane.showMessageDialog(vActual, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                vActual.dispose(); // Cerrar la ventana después de registrar
             }
         });
+
         
         // 3 intento commit y push
 
