@@ -3,8 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.stream.IntStream;
 
 public class HorariosVentana extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -39,56 +38,47 @@ public class HorariosVentana extends JFrame {
         JButton btnEliminar = new JButton("Eliminar");
 
         // Acción para el botón Modificar
-        btnModificar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int fila = tabla.getSelectedRow();
-                int columna = tabla.getSelectedColumn();
-                if (fila >= 0 && columna >= 0) {
-                    String nuevoValor = JOptionPane.showInputDialog(
-                            HorariosVentana.this,
-                            "Nuevo valor para la clase:",
-                            tabla.getValueAt(fila, columna)
-                    );
-                    if (nuevoValor != null && !nuevoValor.trim().isEmpty()) {
-                        modeloHorario.modificarClase(fila, columna, nuevoValor);
-                        actualizarTabla();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor, seleccione una celda.");
+        btnModificar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            int columna = tabla.getSelectedColumn();
+            if (fila >= 0 && columna >= 0) {
+                String nuevoValor = JOptionPane.showInputDialog(
+                        HorariosVentana.this,
+                        "Nuevo valor para la clase:",
+                        tabla.getValueAt(fila, columna)
+                );
+                if (nuevoValor != null && !nuevoValor.trim().isEmpty()) {
+                    modeloHorario.modificarClase(fila, columna, nuevoValor);
+                    actualizarTabla();
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una celda.");
             }
         });
 
         // Acción para el botón Insertar
-        btnInsertar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nuevaHora = JOptionPane.showInputDialog("Nueva hora (ej. 22:00 - 23:00):");
-                if (nuevaHora != null && !nuevaHora.trim().isEmpty()) {
-                    String[] nuevaFila = new String[6];
-                    nuevaFila[0] = nuevaHora;
-                    for (int i = 1; i < nuevaFila.length; i++) {
-                        nuevaFila[i] = JOptionPane.showInputDialog("Clase para " + columnas[i] + ":");
-                    }
-                    modeloHorario.insertarClase(-1, nuevaFila);
-                    actualizarTabla();
-                }
+        btnInsertar.addActionListener(e -> {
+            String nuevaHora = JOptionPane.showInputDialog("Nueva hora (ej. 22:00 - 23:00):");
+            if (nuevaHora != null && !nuevaHora.trim().isEmpty()) {
+                String[] nuevaFila = new String[6];
+                nuevaFila[0] = nuevaHora;
+                IntStream.range(1, nuevaFila.length).forEach(i -> 
+                    nuevaFila[i] = JOptionPane.showInputDialog("Clase para " + columnas[i] + ":")
+                );
+                modeloHorario.insertarClase(-1, nuevaFila);
+                actualizarTabla();
             }
         });
 
         // Acción para el botón Eliminar
-        btnEliminar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int fila = tabla.getSelectedRow();
-                int columna = tabla.getSelectedColumn();
-                if (fila >= 0 && columna >= 0) {
-                    modeloHorario.eliminarClase(fila, columna);
-                    actualizarTabla();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor, seleccione una celda.");
-                }
+        btnEliminar.addActionListener(e -> {
+            int fila = tabla.getSelectedRow();
+            int columna = tabla.getSelectedColumn();
+            if (fila >= 0 && columna >= 0) {
+                modeloHorario.eliminarClase(fila, columna);
+                actualizarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una celda.");
             }
         });
 
