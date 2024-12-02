@@ -6,10 +6,12 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-public class NirePanela extends JPanel {
+public class VentanaConFondobis extends JPanel { 
+	 
+	private static final long serialVersionUID = 1L;
 	Image irudia;
 	
-	public NirePanela (Image imagen) {
+	public VentanaConFondobis (Image imagen) {
 		this.irudia = imagen;
 	}
 
@@ -22,11 +24,4 @@ public class NirePanela extends JPanel {
 		//	this.setOpaque(false);
 		} else super.paintComponent(g);
 	}
-/*
-	@Override
-	public void paint(Graphics g) {
-
-		super.paint(g);
-	}
-*/
 }
