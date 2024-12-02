@@ -126,13 +126,8 @@ public class VentanaInicial extends JFrame {
 
         // Añadir el botón al panel norte
         pNorte.add(botonMonitor);
-        botonMonitor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new InicioSesionMonitor();
-            }
-        });
-
+        botonMonitor.addActionListener(e -> new InicioSesionMonitor());
+	    
         // Estilo del panel norte
         pNorte.setBackground(Color.LIGHT_GRAY);
 
