@@ -24,7 +24,7 @@ public class VentanaInicial extends JFrame {
     private JTextField txtNombreUsuario;
     private JPasswordField txtContraseniaUsuario;
     // Declaración de los paneles
-    private JPanel pCentro, pNorte;
+    private JPanel pCentro, pNorte, pSur;
     // Declaramos los JFrames
     private JFrame vActual;
 
@@ -59,7 +59,7 @@ public class VentanaInicial extends JFrame {
         gbc.insets = new Insets(15, 15, 15, 15); // Espaciado
 
         // Establecemos el título de bienvenida
-        lblTitulo = new JLabel("ONGI ETORRI!!");
+        lblTitulo = new JLabel("Wellcome back!! ONGI ETORRI!! BIENVENIDO!!");
         lblTitulo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
         lblTitulo.setForeground(Color.GREEN);
         gbc.gridx = 0;
