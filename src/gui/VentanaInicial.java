@@ -24,7 +24,7 @@ public class VentanaInicial extends JFrame {
     private JTextField txtNombreUsuario;
     private JPasswordField txtContraseniaUsuario;
     // Declaración de los paneles
-    private JPanel pCentro, pNorte, pSur;
+    private JPanel pCentro, pNorte;
     // Declaramos los JFrames
     private JFrame vActual;
 
