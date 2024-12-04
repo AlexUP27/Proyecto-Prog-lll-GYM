@@ -27,6 +27,7 @@ public class VentanaInicial extends JFrame {
     private JPanel pCentro, pNorte;
     // Declaramos los JFrames
     private JFrame vActual;
+
     
 	int zabaleraPantaila, altueraPantaila;
 	Image fondo;
@@ -383,4 +384,8 @@ public class VentanaInicial extends JFrame {
 		VentanaConFondobis panel = new VentanaConFondobis(fondo);
 		return panel;
 	}
+
+
+    
+
 }
