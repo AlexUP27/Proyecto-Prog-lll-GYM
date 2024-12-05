@@ -1,0 +1,140 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+public class VentanaNewWindow {
+	
+	public VentanaNewWindow(String user) {
+		
+	
+	 JFrame nuevaVentana = new JFrame("Ventana Clientes");
+     nuevaVentana.setSize(400, 300);
+     nuevaVentana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+     nuevaVentana.setLocationRelativeTo(null);
+
+     // Crear un panel principal con un BorderLayout
+     JPanel panelPrincipal = new JPanel(new BorderLayout());
+     
+     // Crear el botón de "Cerrar Sesión" en la esquina superior derecha
+     JButton btnCerrarSesion = new JButton("Cerrar Sesión");
+     btnCerrarSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     btnCerrarSesion.setBackground(Color.RED);
+     btnCerrarSesion.setForeground(Color.WHITE);
+     btnCerrarSesion.setFocusPainted(false); // Sin borde al seleccionar
+
+     // Panel para el botón en la parte superior derecha
+     JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+     panelSuperior.setBackground(Color.LIGHT_GRAY);
+     panelSuperior.add(btnCerrarSesion);
+     
+     // Añadir el panel superior al panel principal
+     panelPrincipal.add(panelSuperior, BorderLayout.NORTH);
+     
+     // Añadir un boton o algo proximamente
+     JLabel lblMensaje = new JLabel("Añadir algo aqui", JLabel.CENTER);
+     lblMensaje.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+     panelPrincipal.add(lblMensaje, BorderLayout.CENTER);
+
+     // Panel para los botones en la parte inferior
+     JPanel panelInferior = new JPanel(new FlowLayout());
+     panelInferior.setBackground(Color.WHITE);
+
+     // Inicialización del botón "Información Clientes"
+     JButton botonClientes = new JButton("Gestion Clientes");
+     botonClientes.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonClientes.setBackground(Color.BLUE);
+     botonClientes.setForeground(Color.WHITE);
+     botonClientes.setFocusPainted(false); // Sin borde al seleccionar
+     panelInferior.add(botonClientes);
+
+     // Inicialización del botón "Horario Clases"
+     JButton botonHorario = new JButton("Horario Clases");
+     botonHorario.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonHorario.setBackground(Color.BLUE);
+     botonHorario.setForeground(Color.WHITE);
+     botonHorario.setFocusPainted(false); // Sin borde al seleccionar
+     panelInferior.add(botonHorario);
+     
+     //Inicializacion del boton "Gestion de Pagos"
+     JButton botonPagos = new JButton("Gestion de Pagos");
+     botonPagos.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonPagos.setBackground(Color.BLUE);
+     botonPagos.setForeground(Color.WHITE);
+     botonPagos.setFocusPainted(false); // Sin borde al seleccionar
+     panelInferior.add(botonPagos);
+     
+     // Panel para boton gestion de pagos
+     JPanel panelBotonesClientes = new JPanel(new FlowLayout(FlowLayout.CENTER));
+     panelBotonesClientes.add(botonPagos);
+     panelPrincipal.add(panelBotonesClientes, BorderLayout.CENTER);
+     
+     //Inicializacion del boton "Boton de Entrenamiento"
+     JButton btnEntrenamiento = new JButton("Entrenamiento");
+     btnEntrenamiento.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     btnEntrenamiento.setBackground(Color.BLUE);
+     btnEntrenamiento.setForeground(Color.WHITE);
+     btnEntrenamiento.setFocusPainted(false); // Sin borde al seleccionar
+     
+     // Agregar al panel de botones el boton de entrenamiento
+     panelBotonesClientes.add(btnEntrenamiento);
+     
+     //Inicializacion del boton "Seguimiento de Progreso"
+     JButton btnSeguimientoProgreso = new JButton("Seguimiento de Progreso");
+     btnSeguimientoProgreso.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     btnSeguimientoProgreso.setBackground(Color.BLUE);
+     btnSeguimientoProgreso.setForeground(Color.WHITE);
+     btnSeguimientoProgreso.setFocusPainted(false); // Sin borde al seleccionar
+     
+     // Agregar al panel de botones el boton de Seguimiento de Progreso
+     panelBotonesClientes.add(btnSeguimientoProgreso);
+
+     // Añadir el panel inferior al panel principal
+     panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
+     
+     // Establecer el panel principal como el contenido de la ventana
+     nuevaVentana.add(panelPrincipal);
+     nuevaVentana.setVisible(true);
+	    
+     // Listener para el botón de "Cerrar Sesión"
+     btnCerrarSesion.addActionListener(e -> {
+         nuevaVentana.dispose();  // Cerrar la nueva ventana
+         new VentanaInicial(); // Mostrar de nuevo la ventana de inicio de sesión
+     });
+	    
+     // Listener y posición del botón "Información Clientes"
+     botonClientes.addActionListener(e -> new ClientesBd());
+     
+     // Listener y posición del botón "Horario Clases"
+     botonHorario.addActionListener(e -> {
+         ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
+         HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
+         ventanaHorarios.setVisible(true); // Hacer visible la ventana
+         //vActual.setVisible(false); // Hacer invisible la ventana principal
+     });
+     
+     // Listener y posición del botón "GestionPagos"
+     botonPagos.addActionListener(e -> new GestionPagos());
+
+     // Listener y posición del botón "Entrenamientos"
+     btnEntrenamiento.addActionListener(e -> {
+         new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
+         //vActual.setVisible(false);
+     });
+
+     // Listener y posición del botón de "Seguimiento de Progreso"
+     btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
+	 
+	}
+
+	
+	
+}
