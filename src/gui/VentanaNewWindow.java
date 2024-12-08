@@ -116,8 +116,8 @@ public class VentanaNewWindow {
      // Listener y posición del botón "Horario Clases"
      botonHorario.addActionListener(e -> {
          ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
-         HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
-         ventanaHorarios.setVisible(true); // Hacer visible la ventana
+         VentanaSemana ventanaSemana = new VentanaSemana(modeloHorario); // Pasar el modelo al constructor
+         ventanaSemana.setVisible(true); // Hacer visible la ventana
          //vActual.setVisible(false); // Hacer invisible la ventana principal
      });
      

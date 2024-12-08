@@ -25,7 +25,7 @@ public class HorariosVentana extends JFrame {
             }
         });
 
-        String[] columnas = {"Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
+        String[] columnas = {"Hora", "Clase 1", "Clase 2", "Clase 3", "Clase 4", "Clase 5"};
         modeloTabla = new DefaultTableModel(modeloHorario.getHorarios(), columnas);
         tabla = new JTable(modeloTabla);
 
