@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import DB.MonitorBd;
+
 import java.awt.*;
 
 public class MenuPrincipalMonitor extends JFrame {

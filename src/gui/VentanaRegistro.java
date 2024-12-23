@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import DB.BDInicioSesion;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

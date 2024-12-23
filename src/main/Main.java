@@ -1,6 +1,6 @@
 package main;
 
-import gui.BDInicioSesion;
+import DB.BDInicioSesion;
 import gui.VentanaInicial;
 
 public class Main {

@@ -1,4 +1,4 @@
-package gui;
+package DB;
 
 import java.sql.*;
 
