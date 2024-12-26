@@ -21,6 +21,7 @@ public class VentanaRegistro extends JFrame {
     public VentanaRegistro() {
         super();
 
+        int id= 1;
         vActual = this;
 
         // Configuración de la ventana
@@ -110,6 +111,10 @@ public class VentanaRegistro extends JFrame {
                 JOptionPane.showMessageDialog(vActual, "Usuario registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 vActual.dispose(); // Cerrar la ventana después de registrar
             }
+            
+           String sql = String.format("INSERT INTO ContraseñasInicioSesion VALUES ('%d', '%s', %s)", id, usuario, contrasena);
+           
+            
         });
 
         
