@@ -1,6 +1,10 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableColumnModel;
+
+import javax.swing.table.DefaultTableModel;
+
 
 import DB.MonitorBd;
 
@@ -45,10 +49,7 @@ public class MenuPrincipalMonitor extends JFrame {
         JButton btnProgresoClientes = crearBoton("Progreso de Clientes", e -> JOptionPane.showMessageDialog(null, "Abrir Progreso de Clientes"));
         JButton btnRutinas = crearBoton("Rutinas", e -> JOptionPane.showMessageDialog(null, "Abrir Rutinas"));
         JButton btnHorarios = crearBoton("Horarios", e -> {
-            ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
-            HorariosVentana ventanaHorarios = new HorariosVentana(modeloHorario); // Pasar el modelo al constructor
-            ventanaHorarios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            ventanaHorarios.setVisible(true);
+            new VentanaSemana(); // Pasar el modelo al constructor
         });
         JButton btnNotificaciones = crearBoton("Notificaciones", e -> JOptionPane.showMessageDialog(null, "Abrir Notificaciones"));
         JButton btnGestionMonitores = crearBoton("Gestión de Monitores", e -> new MonitorBd());  // Llamada a la ventana de gestión de monitores

@@ -20,7 +20,7 @@ public class VentanaSemana extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
-	public VentanaSemana(ModeloHorario Horario) {
+	public VentanaSemana() {
         
 		super("Tipos de Entrenamiento");
         
