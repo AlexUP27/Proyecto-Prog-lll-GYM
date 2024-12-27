@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import DB.DiasSemanaBD;
+
 public class VentanaSemana extends JFrame{
 
 	
@@ -74,12 +76,11 @@ public class VentanaSemana extends JFrame{
     
         setVisible(true);
        
-
-        btnLunes.addActionListener(e -> new HorariosVentana(Horario));
-        btnMartes.addActionListener(e -> new HorariosVentana(Horario));
-        btnMiercoles.addActionListener(e -> new HorariosVentana(Horario));
-        btnJueves.addActionListener(e -> new HorariosVentana(Horario));
-        btnViernes.addActionListener(e -> new HorariosVentana(Horario));
+        btnLunes.addActionListener(e -> new DiasSemanaBD("Lunes"));
+        btnMartes.addActionListener(e -> new DiasSemanaBD("Martes"));
+        btnMiercoles.addActionListener(e -> new DiasSemanaBD("Miercoles"));
+        btnJueves.addActionListener(e -> new DiasSemanaBD("Jueves"));
+        btnViernes.addActionListener(e -> new DiasSemanaBD("Viernes"));
         
         
         
