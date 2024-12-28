@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import DB.ClientesBd;
+import DB.DiasSemanaBD;
 
 
 public class VentanaNewWindow {
@@ -116,21 +117,13 @@ public class VentanaNewWindow {
      botonClientes.addActionListener(e -> new ClientesBd());
      
      // Listener y posición del botón "Horario Clases"
-     botonHorario.addActionListener(e -> {
-         ModeloHorario modeloHorario = new ModeloHorario(); // Suponiendo que necesitas este modelo
-         VentanaSemana ventanaSemana = new VentanaSemana(modeloHorario); // Pasar el modelo al constructor
-         ventanaSemana.setVisible(true); // Hacer visible la ventana
-         //vActual.setVisible(false); // Hacer invisible la ventana principal
-     });
+     botonHorario.addActionListener(e -> new VentanaSemana());
      
      // Listener y posición del botón "GestionPagos"
      botonPagos.addActionListener(e -> new GestionPagos());
 
      // Listener y posición del botón "Entrenamientos"
-     btnEntrenamiento.addActionListener(e -> {
-         new VentanaEntrenamientos();  // Abre la ventana de tipos de entrenamiento
-         //vActual.setVisible(false);
-     });
+     btnEntrenamiento.addActionListener(e -> new VentanaEntrenamientos());
 
      // Listener y posición del botón de "Seguimiento de Progreso"
      btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
