@@ -24,140 +24,99 @@ public class VentanaInicial extends JFrame {
     private JTextField txtNombreUsuario;
     private JPasswordField txtContraseniaUsuario;
     // Declaración de los paneles
-    private JPanel pCentro, pNorte;
+    private JPanel pCentro, pCentroCentro, pCentroSur, pNorte;
     // Declaramos los JFrames
     private JFrame vActual;
-
     
 	int zabaleraPantaila, altueraPantaila;
 	Image fondo;
 	JLabel lBalioa;
-	int kont;
+	
 
     public VentanaInicial() {
         super();
        
-        kont = 0;
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		zabaleraPantaila = (int) toolkit.getScreenSize().getWidth();
 		altueraPantaila = (int) toolkit.getScreenSize().getHeight();
-		this.setLocation(0,0);
 		this.setSize(zabaleraPantaila, altueraPantaila);
-		this.setTitle("Buscando a nemo");
 		this.setIconImage(new ImageIcon("irudiak/logo.png").getImage());
-	
 		fondo = toolkit.createImage("img/fondo.jpeg");
    	    this.setContentPane(sortuLeihokoPanela());
-		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
         vActual = this;
-
-        // Añadimos un listener para que salte la confirmación de cierre de ventana
-       addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                confirmWindowClosing();
-            }
-        });
-
-        // Establecemos las propiedades de la ventana
-        setBounds(350, 0, 852, 1000);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+       
+        setBounds(375, 150, 620, 600);
         setTitle("DEUSTO GYM");
+        
 
-        // Cambiar el icono de la ventana (Esquina superior izquierda)
         ImageIcon imagen = new ImageIcon("img/icono.png");
         setIconImage(imagen.getImage());
 
-        // Inicializamos los paneles
         pCentro = new JPanel();
+        pCentro.setLayout(new BorderLayout());
+        pCentroCentro = new JPanel();
+        pCentroCentro.setLayout(new GridLayout(2,2));
+        pCentroSur = new JPanel();
+        pCentroSur.setLayout(new GridLayout(1,2));
         pNorte = new JPanel();
+        pNorte.setLayout(new GridLayout());
 
-        // Usamos GridBagLayout para el panel central
-        pCentro.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(15, 15, 15, 15); // Espaciado
-
-        // Establecemos el título de bienvenida
+       
         lblTitulo = new JLabel("WELLCOME!! ONGI ETORRI!! BIENVENIDO!!");
         lblTitulo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
         lblTitulo.setForeground(Color.GREEN);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2; // Ocupa 2 columnas
-        gbc.anchor = GridBagConstraints.CENTER; // Centrar el título
-        pCentro.add(lblTitulo, gbc);
+        pCentro.add(lblTitulo, BorderLayout.NORTH);
 
-        // Etiquetas y campos de texto
+       
         lblNombreUsuario = new JLabel("Introduce tu nombre de usuario:");
         lblNombreUsuario.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
-        gbc.gridwidth = 1;
-        gbc.gridy++;
-        gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
-        pCentro.add(lblNombreUsuario, gbc);
+        pCentroCentro.add(lblNombreUsuario, BorderLayout.CENTER);
 
         txtNombreUsuario = new JTextField(20);
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.EAST; // Alinear a la derecha
-        pCentro.add(txtNombreUsuario, gbc);
+        pCentroCentro.add(txtNombreUsuario, BorderLayout.CENTER);
 
         lblContraseniaUsuario = new JLabel("Introduce tu contraseña:");
         lblContraseniaUsuario.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
-        pCentro.add(lblContraseniaUsuario, gbc);
+        pCentroCentro.add(lblContraseniaUsuario, BorderLayout.CENTER);
 
         txtContraseniaUsuario = new JPasswordField(20);
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.EAST; // Alinear a la derecha
-        pCentro.add(txtContraseniaUsuario, gbc);
+        pCentroCentro.add(txtContraseniaUsuario, BorderLayout.CENTER);
 
-        // Inicialización del botón de inicio de sesión
+        
         btnInicioSesion = new JButton("INICIO SESIÓN");
         btnInicioSesion.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         btnInicioSesion.setBackground(Color.BLUE);
         btnInicioSesion.setForeground(Color.WHITE);
         btnInicioSesion.setFocusPainted(false);
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.gridwidth = 1; // Ocupa 2 columnas
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        pCentro.add(btnInicioSesion, gbc);
+        pCentroSur.add(btnInicioSesion);
         
-     // Inicialización del botón de registro
         btnRegistro = new JButton("REGISTRARSE");
         btnRegistro.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         btnRegistro.setBackground(Color.ORANGE);
         btnRegistro.setForeground(Color.WHITE);
         btnRegistro.setFocusPainted(false);
-        gbc.gridx = 1;  // Segunda columna, misma fila
-        gbc.gridy = gbc.gridy; // Mismo nivel que el botón de inicio de sesión
-        gbc.gridwidth = 1; // Ocupa una sola columna
-        pCentro.add(btnRegistro, gbc);
+        pCentroSur.add(btnRegistro);
 
-        // Inicialización del botón de monitor
         botonMonitor = new JButton("Monitor");
         botonMonitor.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         botonMonitor.setBackground(Color.LIGHT_GRAY);
         botonMonitor.setForeground(Color.BLACK);
         botonMonitor.setFocusPainted(false);
         botonMonitor.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-        // Añadir el botón al panel norte
-        pNorte.add(botonMonitor);
         botonMonitor.addActionListener(e -> new InicioSesionMonitor());
-	    
-        // Estilo del panel norte
+        
+        pNorte.add(botonMonitor);
         pNorte.setBackground(Color.LIGHT_GRAY);
 
-        // Añadimos los paneles al panel principal de la ventana
-        getContentPane().add(pNorte, BorderLayout.NORTH);
-        getContentPane().add(pCentro, BorderLayout.CENTER);
+       
+        getContentPane().add(pNorte);
+        getContentPane().add(pCentro);
+        pCentro.add(pCentroCentro, BorderLayout.CENTER);
+        pCentro.add(pCentroSur, BorderLayout.SOUTH);
 
-     // Añadimos los listeners
+    
         btnInicioSesion.addActionListener(e -> {
             String user = txtNombreUsuario.getText();
             String contrasena = new String(txtContraseniaUsuario.getPassword());
@@ -186,29 +145,23 @@ public class VentanaInicial extends JFrame {
     private boolean usuarioValido(String username, String password) {
         // Consulta SQL para filtrar la tabla segun el nombre de usuario y la contraseña
         String query = "SELECT * FROM ContraseñasInicioSesion WHERE Nom_usuario = ? AND contraseña = ?";
-        
-        // Establecer la conexión a la base de datos SQLite
         try (Connection con = DriverManager.getConnection("jdbc:sqlite:Gym.db");
              PreparedStatement stmt = con.prepareStatement(query)) {
             
-            // Establece los parametros de la consulta
-            stmt.setString(1, username); // Asigna el nombre de usuario
-            stmt.setString(2, password); // Asigna la contraseña
+            stmt.setString(1, username);
+            stmt.setString(2, password); 
 
-            // Ejecuta la consulta
             ResultSet rs = stmt.executeQuery();
             
-            // Si el resultado tiene alguna fila, el usuario es valido
             return rs.next(); 
             
         } catch (SQLException e) {
-            e.printStackTrace(); // Imprime cualquier error de SQL
+            e.printStackTrace(); 
         }
-        // Si no se encuentra un usuario valido, devolver false
+        
         return false;
     }
 
-    
     private void panelDeBienvenida(String username) {
         // Creamos un nuevo frame para la bienvenida
         JFrame frameDeBienvenida = new JFrame("Bienvenido");
@@ -250,15 +203,6 @@ public class VentanaInicial extends JFrame {
         // Hacer invisible la ventana del main
         vActual.setVisible(false);
     }
-	
-    
-    //Confirmacion de cierre de ventana
-  	private void confirmWindowClosing() {
-  		int result = JOptionPane.showConfirmDialog(VentanaInicial.this, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-  		if (result == JOptionPane.YES_OPTION) {
-  			System.exit(0);
-  		}
-  	}
   	
   	public Container sortuLeihokoPanela() {
 		VentanaConFondobis panel = new VentanaConFondobis(fondo);

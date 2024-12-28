@@ -1,5 +1,7 @@
 package DB;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,8 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
-public class DiasSemanaBD extends JFrame {
+public class DiasSemanaBD extends JFrame implements TableCellRenderer{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -85,6 +88,22 @@ public class DiasSemanaBD extends JFrame {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		Component c = table.getDefaultRenderer(table.getColumnClass(column)).getTableCellRendererComponent(
+            table, value, isSelected, hasFocus, row, column);
+
+	    // Verificar si el valor de la celda es "Descanso"
+	    if ("Descanso".equals(value)) {
+	        c.setBackground(Color.GREEN); // Poner el color de fondo verde
+	    } else {
+	        c.setBackground(table.getBackground()); // Mantener el color de fondo predeterminado
+	    }
+	
+	    return c;
+	}
 
 }
 
