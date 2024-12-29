@@ -74,7 +74,7 @@ public class VentanaNewWindow {
      botonPagos.setForeground(Color.WHITE);
      botonPagos.setFocusPainted(false); // Sin borde al seleccionar
      panelInferior.add(botonPagos);
-     
+    
      // Panel para boton gestion de pagos
      JPanel panelBotonesClientes = new JPanel(new FlowLayout(FlowLayout.CENTER));
      panelBotonesClientes.add(botonPagos);
@@ -89,6 +89,7 @@ public class VentanaNewWindow {
      
      // Agregar al panel de botones el boton de entrenamiento
      panelBotonesClientes.add(btnEntrenamiento);
+    
      
      //Inicializacion del boton "Seguimiento de Progreso"
      JButton btnSeguimientoProgreso = new JButton("Seguimiento de Progreso");
@@ -99,7 +100,14 @@ public class VentanaNewWindow {
      
      // Agregar al panel de botones el boton de Seguimiento de Progreso
      panelBotonesClientes.add(btnSeguimientoProgreso);
-
+     
+     JButton botonEntrenamientoRandom = new JButton("Entrenamiento Aleatorio");
+     botonEntrenamientoRandom.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonEntrenamientoRandom.setBackground(Color.BLUE);
+     botonEntrenamientoRandom.setForeground(Color.WHITE);
+     botonEntrenamientoRandom.setFocusPainted(false); // Sin borde al seleccionar
+     panelBotonesClientes.add(botonEntrenamientoRandom);
+     
      // Añadir el panel inferior al panel principal
      panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
      
@@ -128,6 +136,7 @@ public class VentanaNewWindow {
      // Listener y posición del botón de "Seguimiento de Progreso"
      btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
 	 
+     botonEntrenamientoRandom.addActionListener(e -> new VentanaSesionSemanal());
 	}
 
 	
