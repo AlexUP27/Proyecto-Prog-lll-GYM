@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class VentanaSesionSemanal {
+import javax.swing.JFrame;
 
-	 public VentanaSesionSemanal() {
+public class VentanaSesionSemanal extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
+
+	public VentanaSesionSemanal() {
+		
+			setTitle("Progreso de Clientes");
+	        setBounds(400, 300, 300, 120);
+	        setLocationRelativeTo(null);
+	        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+	        List<String> lista = generarSesionAleatoria();
 	        
-	        // Lista de entrenamientos por día
-	        List<List<String>> entrenamientosSemanales = new ArrayList<>();
-	        entrenamientosSemanales.add(List.of("Yoga", "Pilates", "Spinning", "Body Pump", "HIIT"));
-	        entrenamientosSemanales.add(List.of("Cardio", "Yoga", "TRX", "Zumba", "Boxeo"));
-	        entrenamientosSemanales.add(List.of("Crossfit", "Body Pump", "Cardio", "Crossfit", "Stretching"));
-	        entrenamientosSemanales.add(List.of("Zumba", "HIIT", "Power Yoga", "Body Pump", "Spinning"));
-	        entrenamientosSemanales.add(List.of("Spinning", "Crossfit", "TRX", "HIIT", "Body Pump"));
-	        entrenamientosSemanales.add(List.of("Boxeo", "Zumba", "Stretching", "Pilates", "Cardio"));
-
-	        // Generar una sesión semanal aleatoria
-	        List<String> sesionSemanal = generarSesionSemanal(entrenamientosSemanales);
-	        System.out.println("Sesión semanal generada: " + sesionSemanal);
+	       
 	    }
 	 
     public List<String> generarSesionSemanal(List<List<String>> entrenamientos) {
@@ -43,5 +43,27 @@ public class VentanaSesionSemanal {
         return generarSesionRecursiva(entrenamientos, diasRestantes - 1, sesionActual);
     }
 
+    
+    public List<List<String>> generarEntrenamientos(){
+    	// Lista de entrenamientos por día
+        List<List<String>> entrenamientosSemanales = new ArrayList<>();
+        entrenamientosSemanales.add(List.of("Yoga", "Pilates", "Spinning", "Body Pump", "HIIT"));
+        entrenamientosSemanales.add(List.of("Cardio", "Yoga", "TRX", "Zumba", "Boxeo"));
+        entrenamientosSemanales.add(List.of("Crossfit", "Body Pump", "Cardio", "Crossfit", "Stretching"));
+        entrenamientosSemanales.add(List.of("Zumba", "HIIT", "Power Yoga", "Body Pump", "Spinning"));
+        entrenamientosSemanales.add(List.of("Spinning", "Crossfit", "TRX", "HIIT", "Body Pump"));
+        entrenamientosSemanales.add(List.of("Boxeo", "Zumba", "Stretching", "Pilates", "Cardio"));
+        
+        return entrenamientosSemanales;
+    }
+    
+    public List<String> generarSesionAleatoria(){
+    	 // Generar una sesión semanal aleatoria
+    	List<List<String>> entrenamientosSemanales = generarEntrenamientos();
+        List<String> sesionSemanal = generarSesionSemanal(entrenamientosSemanales);
+        System.out.println("Sesión semanal generada: " + sesionSemanal);
+        return sesionSemanal;
+    }
+   
    
 }
