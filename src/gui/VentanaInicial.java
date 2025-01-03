@@ -13,6 +13,8 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
+import graphics.VentanaConFondobis;
+
 public class VentanaInicial extends JFrame {
  
     private static final long serialVersionUID = 1L;

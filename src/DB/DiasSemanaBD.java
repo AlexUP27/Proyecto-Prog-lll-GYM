@@ -20,7 +20,7 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
     	String Day = DiaSemana;
     	
     	setTitle("Gestión de Clientes");
-        setBounds(150, 150, 800, 330);
+        setBounds(350, 250, 800, 330);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
 
@@ -45,7 +45,7 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
             modelo.addColumn("Clase3");
             modelo.addColumn("Clase4");
             modelo.addColumn("Clase5");
-
+            
             cargarDatos(conexion, modelo, DiaSemana);
             
             JButton btnCerrar = new JButton("Cerrar");
