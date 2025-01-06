@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class VentanaSesionSemanal extends JFrame {
@@ -24,6 +25,8 @@ public class VentanaSesionSemanal extends JFrame {
 														"Cardio","TRX","Zumba","Boxeo","Crossfit", "Stretching") ;
     private boolean running = true;
     private final Random random = new Random();
+    private int rutinaId = 0;
+    
 
         
     public VentanaSesionSemanal() {
@@ -128,7 +131,14 @@ public class VentanaSesionSemanal extends JFrame {
         });
         
         boton3.addActionListener(e -> {
-	        //Añadir funcionalidad para que ingrese en la BD la nueva rutina y se pueda ver en el progreso de los clientes
+        	String sql = String.format("INSERT INTO Rutinas VALUES ('%s', '%s', '%s', '%s', '%s')", 
+        								nombreLunes.getText(),
+        								nombreMartes.getText(),
+        								nombreMiercoles.getText(),
+        								nombreJueves.getText(),
+        								nombreViernes.getText());
+        	JOptionPane.showMessageDialog(this, "Tu rutina se ha registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        	rutinaId++;
         });
         
         setVisible(true);    
