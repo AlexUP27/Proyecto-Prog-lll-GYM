@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class VentanaSesionSemanal extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    Thread hilo;
 
     public List<String> entrenamientos = Arrays.asList("Yoga","Pilates","Spinning","Body Pump","HIIT","Power Yoga",
 														"Cardio","TRX","Zumba","Boxeo","Crossfit", "Stretching") ;
@@ -90,66 +91,91 @@ public class VentanaSesionSemanal extends JFrame {
         boton.setBackground(Color.RED);
         boton.setForeground(Color.WHITE);
         
-        JButton boton2 = new JButton("GUARDAR RUTINA");
+        JButton boton2 = new JButton("NUEVA RUTINA");
         boton2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         boton2.setBackground(Color.GREEN);
         boton2.setForeground(Color.WHITE);
         
+        JButton boton3 = new JButton("GUARDAR RUTINA");
+        boton2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        boton2.setBackground(Color.BLUE);
+        boton2.setForeground(Color.WHITE);
+        
         panelBoton.add(boton);
         panelBoton.add(boton2);
+        panelBoton.add(boton3);
+
 
         add(panelEntrenamientos, BorderLayout.CENTER);
         add(panelBoton, BorderLayout.SOUTH);
         
         
-        Thread hilo = new Thread(() -> {
-			
-        		while (running) {
-    			
-        			List<String> randomEntrenamientos = new ArrayList<>();               
-        			for (int i = 0; i < 5; i++) {
-                    randomEntrenamientos.add(entrenamientos.get(random.nextInt(entrenamientos.size())));
-        			}
-        			
-        			ImageIcon iconoLunes = new ImageIcon("img/" + randomEntrenamientos.get(0) + ".png");
-                    imagenLunes.setIcon(iconoLunes);
-                    nombreLunes.setText("Lunes: " +randomEntrenamientos.get(0));
-                    ImageIcon iconoMartes = new ImageIcon("img/" + randomEntrenamientos.get(1) + ".png");
-                    imagenMartes.setIcon(iconoMartes);
-                    nombreMartes.setText("Martes: " +randomEntrenamientos.get(1));
-                    ImageIcon iconoMiercoles = new ImageIcon("img/" + randomEntrenamientos.get(2) + ".png");
-                    imagenMiercoles.setIcon(iconoMiercoles);
-                    nombreMiercoles.setText("Miercoles: " +randomEntrenamientos.get(2));                
-                    ImageIcon iconoJueves = new ImageIcon("img/" + randomEntrenamientos.get(3) + ".png");
-                    imagenJueves.setIcon(iconoJueves);
-                    nombreJueves.setText("Jueves: " +randomEntrenamientos.get(3));
-                    ImageIcon iconoViernes = new ImageIcon("img/" + randomEntrenamientos.get(4) + ".png");
-                    imagenViernes.setIcon(iconoViernes);
-                    nombreViernes.setText("Viernes: " +randomEntrenamientos.get(4));
-        			
-				
-                    
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                
-            }
-        });
-
-        hilo.start();
+        crearAleatorio(imagenLunes, imagenMartes, imagenMiercoles, imagenJueves, imagenViernes, 
+				       nombreLunes, nombreMartes, nombreMiercoles, nombreJueves, nombreViernes);
         
         
         boton.addActionListener(e -> {
+        	running = false;
         	hilo.interrupt();
         });
         
         boton2.addActionListener( e -> {
-        	//Guardar en la BD la informacion de la rutina asociada al cliente
+        	if (hilo.isInterrupted()) {
+        		running = true;
+        		crearAleatorio(imagenLunes, imagenMartes, imagenMiercoles, imagenJueves, imagenViernes, 
+        					   nombreLunes, nombreMartes, nombreMiercoles, nombreJueves, nombreViernes);
+        	}
+        });
+        
+        boton3.addActionListener(e -> {
+	        //Añadir funcionalidad para que ingrese en la BD la nueva rutina y se pueda ver en el progreso de los clientes
         });
         
         setVisible(true);    
  
     }
+    
+    public void crearAleatorio(JLabel imagenLunes, JLabel imagenMartes, JLabel imagenMiercoles, 
+    								JLabel imagenJueves, JLabel imagenViernes, JLabel nombreLunes, 
+    							JLabel nombreMartes, JLabel nombreMiercoles, JLabel nombreJueves, JLabel nombreViernes) {
+    	
+    	hilo = new Thread(() -> {
+			
+    		while (running) {
+    			
+    			List<String> randomEntrenamientos = new ArrayList<>();               
+    			for (int i = 0; i < 5; i++) {
+    	        randomEntrenamientos.add(entrenamientos.get(random.nextInt(entrenamientos.size())));
+    			}
+    			
+    			ImageIcon iconoLunes = new ImageIcon("img/" + randomEntrenamientos.get(0) + ".png");
+    	        imagenLunes.setIcon(iconoLunes);
+    	        nombreLunes.setText("Lunes: " +randomEntrenamientos.get(0));
+    	        ImageIcon iconoMartes = new ImageIcon("img/" + randomEntrenamientos.get(1) + ".png");
+    	        imagenMartes.setIcon(iconoMartes);
+    	        nombreMartes.setText("Martes: " +randomEntrenamientos.get(1));
+    	        ImageIcon iconoMiercoles = new ImageIcon("img/" + randomEntrenamientos.get(2) + ".png");
+    	        imagenMiercoles.setIcon(iconoMiercoles);
+    	        nombreMiercoles.setText("Miercoles: " +randomEntrenamientos.get(2));                
+    	        ImageIcon iconoJueves = new ImageIcon("img/" + randomEntrenamientos.get(3) + ".png");
+    	        imagenJueves.setIcon(iconoJueves);
+    	        nombreJueves.setText("Jueves: " +randomEntrenamientos.get(3));
+    	        ImageIcon iconoViernes = new ImageIcon("img/" + randomEntrenamientos.get(4) + ".png");
+    	        imagenViernes.setIcon(iconoViernes);
+    	        nombreViernes.setText("Viernes: " +randomEntrenamientos.get(4));
+                
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            
+        }
+    	});
+
+    	hilo.start();
+    	
+    }
+    
+    
 }
