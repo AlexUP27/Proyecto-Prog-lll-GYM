@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import DB.BDRutinas;
+
 public class VentanaSesionSemanal extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -100,9 +102,9 @@ public class VentanaSesionSemanal extends JFrame {
         boton2.setForeground(Color.WHITE);
         
         JButton boton3 = new JButton("GUARDAR RUTINA");
-        boton2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-        boton2.setBackground(Color.BLUE);
-        boton2.setForeground(Color.WHITE);
+        boton3.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        boton3.setBackground(Color.BLUE);
+        boton3.setForeground(Color.WHITE);
         
         panelBoton.add(boton);
         panelBoton.add(boton2);
@@ -131,14 +133,22 @@ public class VentanaSesionSemanal extends JFrame {
         });
         
         boton3.addActionListener(e -> {
-        	String sql = String.format("INSERT INTO Rutinas VALUES ('%s', '%s', '%s', '%s', '%s')", 
-        								nombreLunes.getText(),
-        								nombreMartes.getText(),
-        								nombreMiercoles.getText(),
-        								nombreJueves.getText(),
-        								nombreViernes.getText());
+        	
+        	 // borrar/no coger recursivamente los caracteres hasta que encuentre un espacio 
+        	
+        	String Lunes = eliminarHastaEspacio(nombreLunes.getText());
+        	String Martes = eliminarHastaEspacio(nombreMartes.getText());
+        	String Miercoles = eliminarHastaEspacio(nombreMiercoles.getText());
+        	String Jueves = eliminarHastaEspacio(nombreJueves.getText());
+        	String Viernes = eliminarHastaEspacio(nombreViernes.getText());
+        	
+        	// Hacemos el insert en la tabla Rutinas
+        	BDRutinas.insertarRutina(Lunes, Martes, Miercoles, Jueves, Viernes, rutinaId, BDRutinas.con);
+        	
         	JOptionPane.showMessageDialog(this, "Tu rutina se ha registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         	rutinaId++;
+        	
+        	System.out.println(nombreLunes.getText() + nombreMartes.getText() + nombreMiercoles.getText() + nombreJueves.getText()+ nombreViernes.getText());
         });
         
         setVisible(true);    
@@ -185,6 +195,16 @@ public class VentanaSesionSemanal extends JFrame {
 
     	hilo.start();
     	
+    }
+    
+    public static String eliminarHastaEspacio(String Ejercicio) {
+    	// Caso base: si el texto está vacío o no contiene espacio, devuelve el texto completo.
+        if (Ejercicio.isEmpty() || Ejercicio.charAt(0) == ' ') {
+            return Ejercicio.trim(); //Utilizamos texto.trim para que cuando encuentre el espacio: 
+            					 //devuelva el string sin el espacio
+        }
+        // Llamada recursiva eliminando el primer carácter.
+        return eliminarHastaEspacio(Ejercicio.substring(1));
     }
     
     

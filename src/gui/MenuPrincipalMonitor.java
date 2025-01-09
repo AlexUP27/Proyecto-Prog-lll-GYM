@@ -47,7 +47,7 @@ public class MenuPrincipalMonitor extends JFrame {
         // Botones del menú con un diseño moderno
         JButton btnAsistencia = crearBoton("Asistencia", e -> new Asistencia());
         JButton btnProgresoClientes = crearBoton("Progreso de Clientes", e -> JOptionPane.showMessageDialog(null, "Abrir Progreso de Clientes"));
-        JButton btnRutinas = crearBoton("Rutinas", e -> JOptionPane.showMessageDialog(null, "Abrir Rutinas"));
+        JButton btnRutinas = crearBoton("Rutinas", e -> new VentanaRutinas());
         JButton btnHorarios = crearBoton("Horarios", e -> {
             new VentanaSemana(); // Pasar el modelo al constructor
         });

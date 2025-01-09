@@ -11,15 +11,16 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-public class DiasSemanaBD extends JFrame implements TableCellRenderer{
+public class DiasSemanaBD extends JFrame {
 
+	JTable tabla;
 	private static final long serialVersionUID = 1L;
 	
     public DiasSemanaBD(String DiaSemana) {
         
     	String Day = DiaSemana;
     	
-    	setTitle("Gestión de Clientes");
+    	setTitle(DiaSemana);
         setBounds(350, 250, 800, 330);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -37,7 +38,7 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
             Connection conexion = DriverManager.getConnection("jdbc:sqlite:Gym.db");
 
             DefaultTableModel modelo = new DefaultTableModel();
-            JTable tabla = new JTable(modelo);
+            tabla = new JTable(modelo);
 
             modelo.addColumn("Hora");
             modelo.addColumn("Clase1");
@@ -61,6 +62,25 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
             	dispose();
             });
 
+            
+            tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
+				
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+						int row, int column) {
+					/**
+				 	if ("Descanso".equals(value)) {
+				        .setBackground(Color.GREEN); // Poner el color de fondo verde
+				    } else {
+				        c.setBackground(table.getBackground()); // Mantener el color de fondo predeterminado
+				    }
+					* 	
+					*/
+					
+					
+					return null;
+				}
+			});
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -89,6 +109,9 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
         }
     }
 
+    /**
+     * 
+     * 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 			int row, int column) {
@@ -104,6 +127,9 @@ public class DiasSemanaBD extends JFrame implements TableCellRenderer{
 	
 	    return c;
 	}
+	*
+	*
+	**/
 
 }
 
