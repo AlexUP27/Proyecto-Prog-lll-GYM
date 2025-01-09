@@ -87,7 +87,7 @@ public class BDRutinas {
         } 
     }
 
-    //Verificar si existe un usuario en la tabla ContraseñasInicioSesion
+    //Verificar si existe un usuario en la tabla Rutinas
     public static boolean existeRutina(String usuario) {
         boolean existe = false;
         String sql = "SELECT * FROM Rutinas WHERE Id = ?";
@@ -104,6 +104,23 @@ public class BDRutinas {
             e.printStackTrace();
         }
         return existe;
+    }
+    
+    public static int ultimaRutina() {
+        int maxId = -1; // Valor predeterminado si no se encuentra ningún registro
+        String sql = "SELECT MAX(Id) AS MaxId FROM Rutinas";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                maxId = rs.getInt("MaxId"); // Obtiene el valor de MAX(Id)
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxId;
     }
 
 }

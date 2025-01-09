@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 public class DiasSemanaBD extends JFrame {
 
@@ -26,13 +26,13 @@ public class DiasSemanaBD extends JFrame {
         setVisible(true);
 
         try {
-            gestionarClientes(Day);
+            gestionarDia(Day);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void gestionarClientes(String DiaSemana) throws SQLException {
+    public void gestionarDia(String DiaSemana) throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
             Connection conexion = DriverManager.getConnection("jdbc:sqlite:Gym.db");
@@ -63,24 +63,58 @@ public class DiasSemanaBD extends JFrame {
             });
 
             
-            tabla.setDefaultRenderer(Object.class, new TableCellRenderer() {
-				
-				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-						int row, int column) {
-					/**
-				 	if ("Descanso".equals(value)) {
-				        .setBackground(Color.GREEN); // Poner el color de fondo verde
-				    } else {
-				        c.setBackground(table.getBackground()); // Mantener el color de fondo predeterminado
-				    }
-					* 	
-					*/
-					
-					
-					return null;
-				}
-			});
+            tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                        int row, int column) {
+                    // Usa la implementación de la clase base para obtener el componente
+                    JLabel cell = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    // Restaurar el color de fondo predeterminado
+                    if (isSelected) {
+                        cell.setBackground(table.getSelectionBackground());
+                    } else {
+                        cell.setBackground(table.getBackground());
+                    }
+
+                    // Configurar el color de fondo según el valor de la celda
+                    if ("Descanso".equals(value)) {
+                        cell.setBackground(Color.GREEN);
+                    } else if ("Pilates".equals(value)) {
+                        cell.setBackground(Color.BLUE);
+                    } else if ("Yoga".equals(value)) {
+                        cell.setBackground(Color.DARK_GRAY);
+                    } else if ("Spinning".equals(value)) {
+                        cell.setBackground(Color.BLUE);
+                    } else if ("Body Pump".equals(value)) {
+                        cell.setBackground(Color.CYAN);
+                    } else if ("HIIT".equals(value)) {
+                        cell.setBackground(Color.GRAY);
+                    } else if ("Power Yoga".equals(value)) {
+                        cell.setBackground(Color.LIGHT_GRAY);
+                    } else if ("Cardio".equals(value)) {
+                        cell.setBackground(Color.MAGENTA);
+                    } else if ("TRX".equals(value)) {
+                        cell.setBackground(Color.ORANGE);
+                    } else if ("Zumba".equals(value)) {
+                        cell.setBackground(Color.PINK);
+                    } else if ("Boxeo".equals(value)) {
+                        cell.setBackground(Color.RED);
+                    } else if ("Crossfit".equals(value)) {
+                        cell.setBackground(Color.WHITE);
+                    } else if ("Stretching".equals(value)) {
+                        cell.setBackground(Color.YELLOW);
+	                } else if ("Body Combat".equals(value)) {
+	                    cell.setBackground(Color.BLACK);
+	                    
+	                }
+
+                    return cell;
+                }
+            });
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -108,28 +142,6 @@ public class DiasSemanaBD extends JFrame {
             e.printStackTrace();
         }
     }
-
-    /**
-     * 
-     * 
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		Component c = table.getDefaultRenderer(table.getColumnClass(column)).getTableCellRendererComponent(
-            table, value, isSelected, hasFocus, row, column);
-
-	    // Verificar si el valor de la celda es "Descanso"
-	    if ("Descanso".equals(value)) {
-	        c.setBackground(Color.GREEN); // Poner el color de fondo verde
-	    } else {
-	        c.setBackground(table.getBackground()); // Mantener el color de fondo predeterminado
-	    }
-	
-	    return c;
-	}
-	*
-	*
-	**/
 
 }
 

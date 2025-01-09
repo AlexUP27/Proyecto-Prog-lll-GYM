@@ -24,16 +24,17 @@ public class VentanaSesionSemanal extends JFrame {
     Thread hilo;
 
     public List<String> entrenamientos = Arrays.asList("Yoga","Pilates","Spinning","Body Pump","HIIT","Power Yoga",
-														"Cardio","TRX","Zumba","Boxeo","Crossfit", "Stretching") ;
+														"Cardio","TRX","Zumba","Boxeo","Crossfit", "Stretching", "Body Combat") ;
     private boolean running = true;
     private final Random random = new Random();
-    private int rutinaId = 0;
+    private int rutinaId = BDRutinas.ultimaRutina();
+    
     
 
         
     public VentanaSesionSemanal() {
         setTitle("Progreso de Clientes");
-        setBounds(300, 200, 1280, 550); 
+        setBounds(300, 200, 1300, 700); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout()); 
@@ -114,7 +115,7 @@ public class VentanaSesionSemanal extends JFrame {
         add(panelEntrenamientos, BorderLayout.CENTER);
         add(panelBoton, BorderLayout.SOUTH);
         
-        
+        rutinaId++;
         crearAleatorio(imagenLunes, imagenMartes, imagenMiercoles, imagenJueves, imagenViernes, 
 				       nombreLunes, nombreMartes, nombreMiercoles, nombreJueves, nombreViernes);
         
@@ -189,7 +190,6 @@ public class VentanaSesionSemanal extends JFrame {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            
         }
     	});
 
