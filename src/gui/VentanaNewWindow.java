@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import DB.ClientesBd;
@@ -15,6 +17,8 @@ import DB.DiasSemanaBD;
 
 
 public class VentanaNewWindow {
+	
+	String entrenamiento;
 	
 	public VentanaNewWindow(String user) {
 		
@@ -108,6 +112,13 @@ public class VentanaNewWindow {
      botonEntrenamientoRandom.setFocusPainted(false); // Sin borde al seleccionar
      panelBotonesClientes.add(botonEntrenamientoRandom);
      
+     JButton botonCombinatoria = new JButton("Combinatoria de Entrenamientos");
+     botonCombinatoria.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonCombinatoria.setBackground(Color.BLUE);
+     botonCombinatoria.setForeground(Color.WHITE);
+     botonCombinatoria.setFocusPainted(false); // Sin borde al seleccionar
+     panelBotonesClientes.add(botonCombinatoria);
+     
      // Añadir el panel inferior al panel principal
      panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
      
@@ -137,7 +148,24 @@ public class VentanaNewWindow {
      btnSeguimientoProgreso.addActionListener(e -> new SeguimientoProgreso());
 	 
      botonEntrenamientoRandom.addActionListener(e -> new VentanaSesionSemanal());
+     
+     botonCombinatoria.addActionListener(e -> {
+     entrenamiento = pedirEntrenamiento();
+     if (VentanaCombinaciones.entrenamientos.contains(entrenamiento)) new VentanaCombinaciones(entrenamiento);
+     });
+     
+     
 	}
+	
+	public String pedirEntrenamiento() {
+		String entrenamiento = JOptionPane.showInputDialog(null, "Cual es el entrenamiento con el que quieres empezar la semana?", 
+                											"Solicitud de entrenamiento", JOptionPane.QUESTION_MESSAGE);
+		
+	    if (!VentanaCombinaciones.entrenamientos.contains(entrenamiento)) {
+	    	JOptionPane.showMessageDialog(null, "Ese entrenamiento no está disponible", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+	    	return null;
+	    } else return entrenamiento;
+    }
 
 	
 	
