@@ -2,9 +2,15 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VentanaNotificaciones extends JFrame {
     private static final long serialVersionUID = 1L;
+
+    private DefaultListModel<String> notificacionesModel;
+    private JList<String> notificacionesList;
 
     public VentanaNotificaciones() {
         setTitle("Notificaciones");
@@ -12,10 +18,51 @@ public class VentanaNotificaciones extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Contenido de la ventana de Notificaciones
-        JLabel label = new JLabel("Aquí se gestionarán las notificaciones.");
-        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        add(label, BorderLayout.CENTER);
+        // Configuración del layout
+        setLayout(new BorderLayout());
+
+        // Crear el modelo para la lista de notificaciones
+        notificacionesModel = new DefaultListModel<>();
+        notificacionesList = new JList<>(notificacionesModel);
+        JScrollPane scrollPane = new JScrollPane(notificacionesList);
+        add(scrollPane, BorderLayout.CENTER);
+
+        // Crear panel para los botones
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+
+        // Botón para agregar una notificación
+        JButton btnAgregar = new JButton("Agregar Notificación");
+        btnAgregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String notificacion = JOptionPane.showInputDialog("Ingresa la notificación:");
+                if (notificacion != null && !notificacion.isEmpty()) {
+                    notificacionesModel.addElement(notificacion);
+                }
+            }
+        });
+
+        // Botón para eliminar la notificación seleccionada
+        JButton btnEliminar = new JButton("Eliminar Notificación");
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = notificacionesList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    notificacionesModel.remove(selectedIndex);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor, selecciona una notificación para eliminar.");
+                }
+            }
+        });
+
+        // Agregar botones al panel
+        buttonPanel.add(btnAgregar);
+        buttonPanel.add(btnEliminar);
+
+        // Agregar panel de botones a la ventana
+        add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
     }

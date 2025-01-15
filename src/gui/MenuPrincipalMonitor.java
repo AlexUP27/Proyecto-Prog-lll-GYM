@@ -51,7 +51,7 @@ public class MenuPrincipalMonitor extends JFrame {
         JButton btnHorarios = crearBoton("Horarios", e -> {
             new VentanaSemana(); // Pasar el modelo al constructor
         });
-        JButton btnNotificaciones = crearBoton("Notificaciones", e -> JOptionPane.showMessageDialog(null, "Abrir Notificaciones"));
+        JButton btnNotificaciones = crearBoton("Notificaciones", e -> new VentanaNotificaciones());
         JButton btnGestionMonitores = crearBoton("Gestión de Monitores", e -> new MonitorBd());  // Llamada a la ventana de gestión de monitores
 
         // Añadir botones al panel
