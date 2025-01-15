@@ -1,11 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableColumnModel;
-
-import javax.swing.table.DefaultTableModel;
-
-
 import DB.MonitorBd;
 
 import java.awt.*;

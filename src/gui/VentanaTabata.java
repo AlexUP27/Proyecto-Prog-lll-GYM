@@ -7,7 +7,11 @@ import java.awt.event.ActionListener;
 
 public class VentanaTabata extends JFrame {
 
-    private JButton btnEmpezar;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton btnEmpezar;
     private JButton btnDetener;
     private Timer timer;
     private int tiempoRestante; 
