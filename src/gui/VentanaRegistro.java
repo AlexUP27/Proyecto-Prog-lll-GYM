@@ -110,7 +110,7 @@ public class VentanaRegistro extends JFrame {
                 vActual.dispose(); // Cerrar la ventana después de registrar
             }
             
-           String sql = String.format("INSERT INTO ContraseñasInicioSesion VALUES ('%d', '%s', %s)", id, usuario, contrasena);
+           String.format("INSERT INTO ContraseñasInicioSesion VALUES ('%d', '%s', %s)", id, usuario, contrasena);
            
             
         });
