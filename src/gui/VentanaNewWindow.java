@@ -119,6 +119,14 @@ public class VentanaNewWindow {
      botonCombinatoria.setFocusPainted(false); // Sin borde al seleccionar
      panelBotonesClientes.add(botonCombinatoria);
      
+     //Inicialización del botón "Tabata"
+     JButton botonTabata = new JButton("Tabata");
+     botonTabata.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+     botonTabata.setBackground(Color.BLUE);
+     botonTabata.setForeground(Color.WHITE);
+     botonTabata.setFocusPainted(false); // Sin borde al seleccionar
+     panelInferior.add(botonTabata);
+     
      // Añadir el panel inferior al panel principal
      panelPrincipal.add(panelInferior, BorderLayout.SOUTH);
      
@@ -154,7 +162,8 @@ public class VentanaNewWindow {
      if (VentanaCombinaciones.entrenamientos.contains(entrenamiento)) new VentanaCombinaciones(entrenamiento);
      });
      
-     
+     // Listener para el botón "Tabata"
+     botonTabata.addActionListener(e -> new VentanaTabata());
 	}
 	
 	public String pedirEntrenamiento() {
